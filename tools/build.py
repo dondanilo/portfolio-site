@@ -52,6 +52,8 @@ def inline(m):
     return f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode()
 
 
+# блоки-черновики (<!--draft: …--> … <!--/draft-->) на сайт не попадают — так раздел прячется, но остаётся в исходнике
+src = re.sub(r"<!--draft:.*?<!--/draft-->\n?", "", src, flags=re.S)
 page = re.sub(r"@@(assets/[\w./-]+)", inline, src.replace("<!--EVENTS-->", render_events()))
 shutil.rmtree(dist, ignore_errors=True)
 (dist / "assets").mkdir(parents=True)

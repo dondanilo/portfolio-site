@@ -163,6 +163,10 @@
   .section > * { position: relative; z-index: 2; }
   .sec-head { max-width: 980px; margin-bottom: clamp(40px, 7vh, 72px); }
   .sec-num { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 22px; }
+  /* номера разделов считаются сами: 01 — главный экран, дальше по порядку; скрытый раздел не оставляет дыры */
+  main { counter-reset: sec 1; }
+  main > .section { counter-increment: sec; }
+  .sec-num::before { content: counter(sec, decimal-leading-zero) " / "; }
   .section h2 { font-size: clamp(38px, 5.4vw, 84px); font-weight: 600; line-height: .95; letter-spacing: -.04em; }
   .section h2 em, .contact-title em { font-style: normal; color: var(--accent); }
   .sec-lead { margin-top: 24px; max-width: 620px; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; color: #b9bac2; }
@@ -397,7 +401,6 @@
   <nav>
     <div class="brand"><b>Данил</b><span>портфолио · 2026</span></div>
     <ul>
-      <li><a href="#cases">Кейсы</a></li>
       <li><a href="#path">Опыт</a></li>
       <li><a href="#contact">Контакты</a></li>
       <li><a class="pill" href="#contact">CV · PDF ↓</a></li>
@@ -411,7 +414,7 @@
     <h1><span class="hi">Привет, я Данил —</span>маркетолог, который <em>считает.</em></h1>
     <p class="lead">Делаю так, чтобы <span class="slot" id="slot"></span></p>
     <div class="cta">
-      <a class="btn primary" href="#cases">Смотреть кейсы ↓</a>
+      <a class="btn primary" href="#path">Смотреть опыт ↓</a>
       <a class="btn ghost" href="#contact">Резюме, PDF</a>
     </div>
   </div>
@@ -441,7 +444,7 @@
   <!-- 02 · Цифры -->
   <section class="section" id="numbers">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">02 / Цифры</div>
+      <div class="sec-num">Цифры</div>
       <h2>12 лет маркетинга —<br>в цифрах.</h2>
     </div>
     <div class="stats">
@@ -456,7 +459,7 @@
   <!-- 03 · Бренды: только логотипы -->
   <section class="section brands" id="brands">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">03 / Бренды</div>
+      <div class="sec-num">Бренды</div>
       <h2>С кем работал.</h2>
     </div>
     <div class="marquee" data-reveal>
@@ -493,7 +496,7 @@
   <!-- 04 · Путь (без годов) -->
   <section class="section" id="path">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">04 / Путь</div>
+      <div class="sec-num">Путь</div>
       <h2>От агентства —<br>к роли CMO.</h2>
     </div>
     <ol class="path">
@@ -504,10 +507,10 @@
         <p class="note">B2B-маркетинг системного интегратора в IT и информационной безопасности: лидогенерация, качество лида, связка маркетинга с продажами.</p>
       </li>
       <li data-reveal>
-        <span class="tag">Консалтинг</span>
+        <span class="tag">Медэстетика</span>
         <h3>InMode · Classys · Tokio Inkarami</h3>
-        <p class="role">Консультант по маркетингу</p>
-        <p class="note">Помогаю брендам выстроить маркетинг: стратегия, каналы, команда.</p>
+        <p class="role">CMO у казахстанского дистрибьютора</p>
+        <p class="note">Маркетинг международных брендов в Казахстане: стратегия, каналы, команда, запуски и мероприятия.</p>
       </li>
       <li data-reveal>
         <span class="tag">Свой продукт</span>
@@ -519,6 +522,12 @@
         <span class="tag">Креатив</span>
         <h3>Café Leffe</h3>
         <p class="role">Арт-директор</p>
+      </li>
+      <li data-reveal>
+        <span class="tag">Отделка и краски</span>
+        <h3>Derufa · Pentrilo</h3>
+        <p class="role">CMO у казахстанского дистрибьютора</p>
+        <p class="note">Derufa (Германия / Россия) — ключевой бренд лакокрасочных материалов: акриловые и интерьерные краски, фасадные покрытия, премиальные декоративные штукатурки. Pentrilo (Испания).</p>
       </li>
       <li data-reveal>
         <span class="tag">Агентство</span>
@@ -540,10 +549,11 @@
     </ol>
   </section>
 
-  <!-- 05 · Кейсы — каркас, наполним цифрами -->
+  <!--draft: кейсы скрыты, пока нет описаний — вернуть, когда пользователь пришлёт кейсы-->
+  <!-- Кейсы — каркас, наполним цифрами -->
   <section class="section" id="cases">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">05 / Кейсы</div>
+      <div class="sec-num">Кейсы</div>
       <h2>Задача → решение →<br><em>результат.</em></h2>
     </div>
     <div class="cases">
@@ -564,11 +574,12 @@
       </article>
     </div>
   </section>
+  <!--/draft-->
 
   <!-- 06 · Как работаю как CMO -->
   <section class="section" id="cmo">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">06 / Подход</div>
+      <div class="sec-num">Подход</div>
       <h2>Что я беру на себя<br>как <em>CMO.</em></h2>
     </div>
     <div class="pillars">
@@ -586,7 +597,7 @@
 
   <!-- 07 · Event-маркетинг — отдельный экран, наполним позже -->
   <section class="section events" id="events">
-    <div class="sec-num" data-reveal>07 / Event-маркетинг</div>
+    <div class="sec-num" data-reveal>Event-маркетинг</div>
     <h2 class="events-title" data-reveal><span>Event</span><br>маркетинг.</h2>
     <p class="sec-lead" data-reveal>Презентации, конференции, выставки и коллаборации — 100+ выступлений в России и Казахстане.</p>
     <div class="events-list">
@@ -598,7 +609,7 @@
   <!-- 08 · AI -->
   <section class="section" id="ai">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">08 / AI</div>
+      <div class="sec-num">AI</div>
       <h2>Внедряю AI<br>в маркетинг — <em>на практике.</em></h2>
     </div>
     <div class="ai-grid">
@@ -615,7 +626,7 @@
     <div class="apps-layout">
       <div>
         <div class="sec-head" data-reveal>
-          <div class="sec-num">09 / Приложения</div>
+          <div class="sec-num">Приложения</div>
           <h2>Разработка iOS<br>и Android-приложений.</h2>
           <p class="sec-lead">Делаю мобильные приложения под ключ: продукт и контент, подписки, пуш-уведомления, аналитика и публикация в сторах.</p>
         </div>
@@ -669,7 +680,7 @@
   <!-- 10 · Образование -->
   <section class="section" id="education">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">10 / Образование</div>
+      <div class="sec-num">Образование</div>
       <h2>Учусь <em>постоянно.</em></h2>
     </div>
     <ol class="path edu">
@@ -700,10 +711,12 @@
         <div class="marquee-set">
           <a href="https://www.coursera.org/verify/professional-cert/7WOUDYWWT7GM" target="_blank" rel="noopener" title="Google Digital Marketing & E-commerce — Professional Certificate — проверить на Coursera"><img src="@@assets/certs/7WOUDYWWT7GM.webp" alt="Сертификат: Google Digital Marketing & E-commerce — Professional Certificate" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/EPG292YUPON5" target="_blank" rel="noopener" title="Illinois Tech — Competitive Strategy — проверить на Coursera"><img src="@@assets/certs/EPG292YUPON5.webp" alt="Сертификат: Illinois Tech — Competitive Strategy" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener" title="Illinois Tech — MBA Orientation — проверить на Coursera"><img src="@@assets/certs/72UWBHZMOP78.webp" alt="Сертификат: Illinois Tech — MBA Orientation" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/USSZ1KIWVUMT" target="_blank" rel="noopener" title="Meta — Marketing Analytics Foundation — проверить на Coursera"><img src="@@assets/certs/USSZ1KIWVUMT.webp" alt="Сертификат: Meta — Marketing Analytics Foundation" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/ZSTZ80YAU8CQ" target="_blank" rel="noopener" title="Meta — Introduction to Data Analytics — проверить на Coursera"><img src="@@assets/certs/ZSTZ80YAU8CQ.webp" alt="Сертификат: Meta — Introduction to Data Analytics" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/LU02VJLY6TRE" target="_blank" rel="noopener" title="UC Davis — The Strategy of Content Marketing — проверить на Coursera"><img src="@@assets/certs/LU02VJLY6TRE.webp" alt="Сертификат: UC Davis — The Strategy of Content Marketing" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener" title="Illinois Tech — MBA Orientation — проверить на Coursera"><img src="@@assets/certs/72UWBHZMOP78.webp" alt="Сертификат: Illinois Tech — MBA Orientation" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/ZSTZ80YAU8CQ" target="_blank" rel="noopener" title="Meta — Introduction to Data Analytics — проверить на Coursera"><img src="@@assets/certs/ZSTZ80YAU8CQ.webp" alt="Сертификат: Meta — Introduction to Data Analytics" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/325G651F4XLP" target="_blank" rel="noopener" title="Canva — Social Media Visuals for Business — проверить на Coursera"><img src="@@assets/certs/325G651F4XLP.webp" alt="Сертификат: Canva — Social Media Visuals for Business" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/66GTLZD05273" target="_blank" rel="noopener" title="Canva — Create and Design Digital Products — проверить на Coursera"><img src="@@assets/certs/66GTLZD05273.webp" alt="Сертификат: Canva — Create and Design Digital Products" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/86SDRUP7F1XK" target="_blank" rel="noopener" title="Google — Start Writing Prompts like a Pro — проверить на Coursera"><img src="@@assets/certs/86SDRUP7F1XK.webp" alt="Сертификат: Google — Start Writing Prompts like a Pro" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/LNTQ94E708QS" target="_blank" rel="noopener" title="Google — Design Prompts for Everyday Work Tasks — проверить на Coursera"><img src="@@assets/certs/LNTQ94E708QS.webp" alt="Сертификат: Google — Design Prompts for Everyday Work Tasks" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/9P44T2VYQE7G" target="_blank" rel="noopener" title="Google — Speed Up Data Analysis and Presentation Building — проверить на Coursera"><img src="@@assets/certs/9P44T2VYQE7G.webp" alt="Сертификат: Google — Speed Up Data Analysis and Presentation Building" loading="lazy"></a>
@@ -715,8 +728,6 @@
           <a href="https://www.coursera.org/verify/YGGNEBGVTYWN" target="_blank" rel="noopener" title="Google — Assess for Success: Marketing Analytics — проверить на Coursera"><img src="@@assets/certs/YGGNEBGVTYWN.webp" alt="Сертификат: Google — Assess for Success: Marketing Analytics" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/3NRVEAKAPPRY" target="_blank" rel="noopener" title="Google — Make the Sale: E-commerce Stores — проверить на Coursera"><img src="@@assets/certs/3NRVEAKAPPRY.webp" alt="Сертификат: Google — Make the Sale: E-commerce Stores" loading="lazy"></a>
           <a href="https://www.coursera.org/verify/ZJCQ8MOLYKWA" target="_blank" rel="noopener" title="Google — Satisfaction Guaranteed: Customer Loyalty — проверить на Coursera"><img src="@@assets/certs/ZJCQ8MOLYKWA.webp" alt="Сертификат: Google — Satisfaction Guaranteed: Customer Loyalty" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/325G651F4XLP" target="_blank" rel="noopener" title="Canva — Social Media Visuals for Business — проверить на Coursera"><img src="@@assets/certs/325G651F4XLP.webp" alt="Сертификат: Canva — Social Media Visuals for Business" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/66GTLZD05273" target="_blank" rel="noopener" title="Canva — Create and Design Digital Products — проверить на Coursera"><img src="@@assets/certs/66GTLZD05273.webp" alt="Сертификат: Canva — Create and Design Digital Products" loading="lazy"></a>
         </div>
       </div>
     </div>
@@ -770,7 +781,7 @@
 
   <!-- 11 · Контакты -->
   <section class="section contact" id="contact">
-    <div class="sec-num" data-reveal>11 / Контакты</div>
+    <div class="sec-num" data-reveal>Контакты</div>
     <h2 class="contact-title" data-reveal>Ищу роль <em>CMO.</em><br>Обсудим?</h2>
     <div class="contact-links" data-reveal>
       <a href="mailto:i@duljanov.ru">i@duljanov.ru</a>

@@ -15,6 +15,8 @@
 
 Каждый push в `main` → GitHub Actions собирает сайт и выкладывает его на GitHub Pages (`.github/workflows/deploy.yml`).
 
+Адрес: **https://cmo.getdone.kz** — CNAME `cmo` → `dondanilo.github.io` в DNS getdone.kz (Hoster.kz), домен прописан в настройках Pages.
+
 Локально посмотреть:
 
 ```sh

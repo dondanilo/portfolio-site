@@ -233,7 +233,16 @@
   /* контурные буквы не должны наползать друг на друга — иначе видны линии пересечений */
   .events-title span { color: var(--bg); -webkit-text-stroke: 3px rgba(242, 241, 236, .85); paint-order: stroke fill; letter-spacing: 0; }
   .events-list { display: grid; gap: clamp(56px, 9vh, 96px); margin-top: clamp(48px, 8vh, 88px); }
-  .event-slot { min-height: 120px; border-radius: 20px; border: 1px dashed rgba(255, 255, 255, .18); background: rgba(255, 255, 255, .015); display: flex; align-items: center; justify-content: center; padding: 18px; }
+  /* статус «архив выгружается»: мероприятия были, материалы ещё не загружены */
+  .event-sync { padding: 22px 24px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .sync-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+  .sync-row b { font-weight: 500; color: var(--fg); }
+  .sync-note { color: var(--muted); }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: syncPulse 1.6s ease-in-out infinite; }
+  @keyframes syncPulse { 50% { opacity: .25; } }
+  .sync-bar { position: relative; height: 2px; margin-top: 18px; background: rgba(255, 255, 255, .08); border-radius: 2px; overflow: hidden; }
+  .sync-bar i { position: absolute; top: 0; bottom: 0; width: 30%; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: syncRun 2.4s cubic-bezier(.5, 0, .5, 1) infinite; }
+  @keyframes syncRun { from { left: -30%; } to { left: 100%; } }
 
   /* карточка мероприятия: шапка + альбом-мозаика */
   .event-head { display: grid; grid-template-columns: 64px 1fr auto; gap: 24px; align-items: start; margin-bottom: 24px; }
@@ -381,6 +390,8 @@
     .marquee-track { animation: none; flex-wrap: wrap; }
     .store { animation: none; }
     .rh b { animation: none; }
+    .sync-dot, .sync-bar i { animation: none; }
+    .sync-bar i { left: 0; width: 45%; }
   }
 </style>
 </head>
@@ -602,7 +613,10 @@
     <p class="sec-lead" data-reveal>Презентации, конференции, выставки и коллаборации — 100+ выступлений в России и Казахстане.</p>
     <div class="events-list">
 <!--EVENTS-->
-      <div class="event-slot" data-reveal><span>Следующее мероприятие — скоро</span></div>
+      <div class="event-sync" data-reveal role="status">
+        <div class="sync-row"><span class="sync-dot"></span><b>Выгрузка архива мероприятий</b><span class="sync-note">фото и отчёты по остальным событиям — в обработке</span></div>
+        <div class="sync-bar"><i></i></div>
+      </div>
     </div>
   </section>
 

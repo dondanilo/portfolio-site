@@ -60,4 +60,5 @@ shutil.rmtree(dist, ignore_errors=True)
 (dist / "index.html").write_text(page, encoding="utf-8")
 shutil.copytree(root / "assets/events", dist / "assets/events")
 shutil.copy(root / "assets/og.jpg", dist / "og.jpg")
+shutil.copy(root / "assets/Danil_Ulyanov_CV.pdf", dist / "Danil_Ulyanov_CV.pdf")   # PDF-резюме собирает tools/build_cv.mjs
 print("dist/index.html", len(page) // 1024, "KB")

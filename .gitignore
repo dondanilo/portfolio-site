@@ -10,3 +10,6 @@ assets/apps/
 
 .DS_Store
 __pycache__/
+
+# временный файл генератора PDF-резюме
+cv/_render.html

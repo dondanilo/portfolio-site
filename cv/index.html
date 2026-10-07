@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Данил Ульянов — резюме, CMO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Резюме для печати и отправки файлом. Собирается в PDF: node tools/build_cv.mjs
+     Тексты — те же, что на сайте (src/index.html); при правках сайта обновлять и здесь. */
+  @page { size: A4; margin: 0; }
+  :root {
+    --ink: #111113; --muted: #686a73; --soft: #8d8f97; --line: #e4e4df;
+    --lime: #c8ff2e; --paper: #ffffff; --card: #f5f5f2;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #d9d9d4; }
+  body { font-family: "Inter Tight", system-ui, sans-serif; color: var(--ink); font-size: 9.3pt; line-height: 1.42; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; height: 297mm; padding: 13mm 14mm 12mm; background: var(--paper); margin: 0 auto 8mm; overflow: hidden; position: relative; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; margin-bottom: 0; }
+  @media print { html, body { background: none; } .page { margin: 0; } }
+  a { color: inherit; text-decoration: none; }
+
+  /* шапка */
+  .head { display: grid; grid-template-columns: 1fr 34mm; gap: 8mm; align-items: start; }
+  .eyebrow { font-family: var(--mono); font-size: 7.4pt; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 2mm; }
+  .eyebrow::before { content: ""; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 .5mm #9fd000 inset; }
+  h1 { margin: 3mm 0 1.5mm; font-size: 30pt; font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+  .title { font-size: 13pt; font-weight: 500; letter-spacing: -.01em; }
+  .title mark { background: var(--lime); padding: 0 1.2mm; border-radius: 1mm; }
+  .contacts { display: flex; flex-wrap: wrap; gap: 1.2mm 5mm; margin-top: 4.5mm; font-family: var(--mono); font-size: 7.8pt; color: #33343a; }
+  .contacts a { border-bottom: .25mm solid #c9c9c3; }
+  .photo { width: 34mm; height: 40mm; border-radius: 3mm; background: linear-gradient(180deg, #e9e9e5, #d6d6d1); overflow: hidden; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 58% 4%; filter: contrast(1.02); }
+
+  .summary { margin-top: 6mm; font-size: 10.2pt; line-height: 1.45; color: #23242a; max-width: 165mm; }
+  .summary b { font-weight: 600; }
+
+  /* цифры */
+  .nums { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 6mm; border-top: .3mm solid var(--ink); border-bottom: .25mm solid var(--line); }
+  .num { padding: 3mm 3mm 3mm 0; }
+  .num + .num { padding-left: 3mm; border-left: .25mm solid var(--line); }
+  .num b { display: block; font-size: 19pt; font-weight: 600; letter-spacing: -.04em; line-height: 1.05; }
+  .num b i { font-style: normal; color: #6f9900; }
+  .num span { display: block; margin-top: 1mm; font-size: 7.4pt; line-height: 1.3; color: var(--muted); }
+
+  /* разделы */
+  .sec { margin-top: 6.5mm; }
+  .sec-h { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 2.6mm; font-family: var(--mono); font-size: 7.6pt; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+  .sec-h::before { content: ""; width: 2mm; height: 2mm; background: var(--lime); transform: rotate(45deg); box-shadow: 0 0 0 .3mm #9fd000; }
+  .sec-h::after { content: ""; flex: 1; height: .25mm; background: var(--line); }
+
+  /* опыт */
+  .job { display: grid; grid-template-columns: 26mm 1fr; column-gap: 4mm; padding: 2.3mm 0; border-bottom: .25mm solid var(--line); }
+  .job:last-child { border-bottom: 0; }
+  .job .tag { font-family: var(--mono); font-size: 6.6pt; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); padding-top: .9mm; }
+  .job .tag.now { color: #4f7000; font-weight: 500; }
+  .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 4mm; }
+  .job h3 { font-size: 10.6pt; font-weight: 600; letter-spacing: -.015em; }
+  .job .role { font-size: 8.6pt; color: #33343a; text-align: right; white-space: nowrap; }
+  .job p { margin-top: .8mm; font-size: 8.5pt; color: var(--muted); line-height: 1.4; }
+
+  /* сетки второй страницы */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5mm; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5mm; }
+  .card { background: var(--card); border-radius: 2.5mm; padding: 3mm 3.2mm; }
+  .card h4 { font-size: 9.6pt; font-weight: 600; letter-spacing: -.01em; margin-bottom: .8mm; }
+  .card p { font-size: 8.2pt; color: var(--muted); line-height: 1.38; }
+  .card .k { font-family: var(--mono); font-size: 6.6pt; color: #4f7000; letter-spacing: .08em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 1.5mm; margin-top: 2.4mm; }
+  .chips span { font-family: var(--mono); font-size: 6.8pt; padding: .8mm 2mm; border: .25mm solid #d4d4ce; border-radius: 5mm; color: #3c3d43; }
+
+  .edu { display: grid; grid-template-columns: 26mm 1fr auto; column-gap: 4mm; padding: 1.8mm 0; border-bottom: .25mm solid var(--line); align-items: baseline; }
+  .edu .tag { font-family: var(--mono); font-size: 6.6pt; letter-spacing: .1em; text-transform: uppercase; color: var(--soft); }
+  .edu .tag.now { color: #4f7000; font-weight: 500; }
+  .edu b { font-size: 10pt; font-weight: 600; }
+  .edu span { font-size: 8.2pt; color: var(--muted); text-align: right; }
+  .certs { margin-top: 2.6mm; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2mm 6mm; font-size: 8.1pt; }
+  .certs div { display: flex; gap: 2mm; }
+  .certs div b { font-weight: 600; white-space: nowrap; }
+  .certs div span { color: var(--muted); }
+
+  .logos { display: flex; flex-wrap: wrap; align-items: center; gap: 3.2mm 6.5mm; }
+  .logos img { height: var(--h, 6mm); width: auto; filter: invert(1); opacity: .78; }
+
+  .foot { position: absolute; left: 14mm; right: 14mm; bottom: 11mm; display: grid; grid-template-columns: 22mm 1fr; gap: 5mm; align-items: center; padding-top: 4mm; border-top: .3mm solid var(--ink); }
+  .foot .qr { width: 22mm; height: 22mm; }
+  .foot .qr svg { width: 100%; height: 100%; }
+  .foot b { font-size: 12pt; font-weight: 600; letter-spacing: -.02em; }
+  .foot p { margin-top: 1mm; font-size: 8.4pt; color: var(--muted); }
+  /* вторая страница плотнее: на ней больше блоков */
+  .p2 .sec { margin-top: 4.6mm; }
+  .p2 .sec-h { margin-bottom: 2mm; }
+  .p2 .card { padding: 2.3mm 2.8mm; }
+  .p2 .card h4 { font-size: 9.2pt; margin-bottom: .5mm; }
+  .p2 .card p { font-size: 7.9pt; line-height: 1.33; }
+  .p2 .grid3, .p2 .grid2 { gap: 2mm; }
+  .p2 .edu { padding: 1.4mm 0; }
+  .p2 .certs { margin-top: 2mm; gap: .8mm 6mm; font-size: 7.9pt; }
+  .p2 .chips { margin-top: 1.8mm; }
+  .p2 .logos { gap: 2.6mm 5.5mm; }
+  .p2 .logos img { height: calc(var(--h, 6mm) * .82); }
+  .p2 .foot { grid-template-columns: 17mm 1fr; padding-top: 3mm; bottom: 10mm; }
+  .p2 .foot .qr { width: 17mm; height: 17mm; }
+  .pnum { position: absolute; right: 14mm; top: 8mm; font-family: var(--mono); font-size: 6.6pt; letter-spacing: .1em; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<!-- ============ СТРАНИЦА 1 ============ -->
+<section class="page">
+  <span class="pnum">1 / 2</span>
+  <header class="head">
+    <div>
+      <div class="eyebrow">Открыт к предложениям · Алматы, Казахстан</div>
+      <h1>Данил Ульянов</h1>
+      <div class="title">Маркетолог, который считает · ищу роль <mark>CMO</mark></div>
+      <div class="contacts">
+        <a href="mailto:founder@izigreek.com">founder@izigreek.com</a>
+        <a href="tel:+77751529438">+7 775 152 94 38</a>
+        <a href="https://cmo.getdone.kz">cmo.getdone.kz</a>
+        <a href="https://www.linkedin.com/in/danil-ulyanov-211850362">linkedin.com/in/danil-ulyanov-211850362</a>
+      </div>
+    </div>
+    <div class="photo"><img src="../assets/photos/hero-portrait.webp" alt="Данил Ульянов"></div>
+  </header>
+
+  <p class="summary">
+    <b>12+ лет в маркетинге и продажах.</b> Строю маркетинг под выручку: от стратегии и команды до сквозной аналитики.
+    Сейчас — B2B-маркетинг и лидогенерация в IT и информационной безопасности; параллельно — CMO у казахстанских
+    дистрибьюторов международных брендов. Внедряю AI в маркетинг, запускаю собственные мобильные приложения,
+    провожу мероприятия и обучаю команды.
+  </p>
+
+  <div class="nums">
+    <div class="num"><b>12<i>+</i></b><span>лет в маркетинге и продажах</span></div>
+    <div class="num"><b>$250K<i>+</i></b><span>выручки, отслеженной до продажи: CRM, 1С, Roistat</span></div>
+    <div class="num"><b>50<i>+</i></b><span>ниш: от HoReCa и ритейла до медэстетики и B2B-IT</span></div>
+    <div class="num"><b>100<i>+</i></b><span>выступлений и тренингов в России и Казахстане</span></div>
+    <div class="num"><b>3 000<i>+</i></b><span>человек прошли мой курс по продюсированию</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">Опыт</div>
+    <div class="job">
+      <span class="tag now">● Сейчас</span>
+      <div>
+        <div class="job-top"><h3>Green Light</h3><span class="role">Ведущий маркетолог</span></div>
+        <p>B2B-маркетинг системного интегратора в IT и информационной безопасности: лидогенерация, качество лида, связка маркетинга с продажами.</p>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Медэстетика</span>
+      <div>
+        <div class="job-top"><h3>InMode · Classys · Tokio Inkarami</h3><span class="role">CMO у казахстанского дистрибьютора</span></div>
+        <p>Маркетинг международных брендов в Казахстане: стратегия, каналы, команда, запуски и мероприятия.</p>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Свой продукт</span>
+      <div>
+        <div class="job-top"><h3>IZI</h3><span class="role">Основатель · CMO</span></div>
+        <p>Линейка из шести приложений для изучения языков в App Store — от контента и маркетинга до подписок и публикации.</p>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Креатив</span>
+      <div>
+        <div class="job-top"><h3>Café Leffe</h3><span class="role">Арт-директор</span></div>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Отделка и краски</span>
+      <div>
+        <div class="job-top"><h3>Derufa · Pentrilo</h3><span class="role">CMO у казахстанского дистрибьютора</span></div>
+        <p>Derufa (Германия / Россия) — ключевой бренд лакокрасочных материалов: акриловые и интерьерные краски, фасадные покрытия, премиальные декоративные штукатурки. Pentrilo (Испания).</p>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Агентство</span>
+      <div>
+        <div class="job-top"><h3>SMMART Digital</h3><span class="role">Руководитель отдела маркетинга и продаж</span></div>
+        <p>Собрал и обучил команду — маркетологи, SMM, копирайтеры, дизайнеры. Стратегия, KPI, бюджеты и аналитика.</p>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Бренды</span>
+      <div>
+        <div class="job-top"><h3>Black Star · Volkswagen · Benetton · Dodo Pizza · Ташир</h3><span class="role">Маркетинг и SMM</span></div>
+      </div>
+    </div>
+    <div class="job">
+      <span class="tag">Начало</span>
+      <div>
+        <div class="job-top"><h3>Юриспруденция</h3><span class="role">Главный юрист по защите прав потребителей</span></div>
+        <p>Отсюда привычка проверять регуляторные требования до запуска рекламы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СТРАНИЦА 2 ============ -->
+<section class="page p2">
+  <span class="pnum">2 / 2</span>
+  <div class="sec" style="margin-top:0">
+    <div class="sec-h">Что я беру на себя как CMO</div>
+    <div class="grid3">
+      <div class="card"><span class="k">01</span><h4>Стратегия</h4><p>Позиционирование, анализ рынка и конкурентов, план каналов — онлайн и офлайн.</p></div>
+      <div class="card"><span class="k">02</span><h4>Команда</h4><p>Подбор, обучение и мотивация маркетологов, SMM, дизайнеров и копирайтеров.</p></div>
+      <div class="card"><span class="k">03</span><h4>Бюджет и KPI</h4><p>Распределение бюджета, контроль расхода, CPA, ROI и LTV по каждому каналу.</p></div>
+      <div class="card"><span class="k">04</span><h4>Лиды и продажи</h4><p>Критерии качества лида, передача в продажи, материалы для отдела продаж.</p></div>
+      <div class="card"><span class="k">05</span><h4>Бренд</h4><p>Айдентика, tone of voice, PR, мероприятия и коллаборации.</p></div>
+      <div class="card"><span class="k">06</span><h4>Аналитика</h4><p>Сквозные метрики, регулярные отчёты и быстрые тесты новых каналов.</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">AI в маркетинге — на практике</div>
+    <div class="grid2">
+      <div class="card"><h4>Агенты для рекламы и аналитики</h4><p>Отчёты Meta, Google Ads, LinkedIn и GA4 собираются по API: расход, лиды, стоимость лида — без ручных выгрузок.</p></div>
+      <div class="card"><h4>Контент на потоке</h4><p>SEO-блоги на нескольких языках: генерация, редактура и публикация как единый конвейер.</p></div>
+      <div class="card"><h4>Продукты с AI-агентами</h4><p>Шесть мобильных приложений собраны и выпущены вместе с AI-агентами для разработки.</p></div>
+      <div class="card"><h4>AI-сценарии для команды</h4><p>Библиотека промптов и агентов под задачи маркетинга: брифы, отчёты, материалы для продаж.</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">Event-маркетинг и приложения</div>
+    <div class="grid3">
+      <div class="card"><span class="k">МАРТ 2026 · АЛМАТЫ</span><h4>Cloudflare Business Dinner</h4><p>Бизнес-ужин Cloudflare Partner Network вместе с Green Light и Marvel Kazakhstan.</p></div>
+      <div class="card"><span class="k">МАЙ 2025 · АЛМАТЫ</span><h4>Запуск бренда Tokio Inkarami</h4><p>Японский бренд ухода за волосами: презентация, выступления партнёров из Японии, ужин для гостей.</p></div>
+      <div class="card"><span class="k">IOS · ПОД КЛЮЧ</span><h4>6 приложений в App Store</h4><p>Продукт и контент, подписки, пуш-уведомления, аналитика и публикация.</p></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">Образование</div>
+    <div class="edu"><span class="tag now">● Учусь сейчас</span><b>MBA · Illinois Tech</b><span>Illinois Institute of Technology, онлайн на Coursera</span></div>
+    <div class="edu"><span class="tag">Бакалавр</span><b>Юриспруденция</b><span>Национальный институт бизнеса</span></div>
+    <div class="edu"><span class="tag">Маркетинг</span><b>Университет «Синергия»</b><span>Маркетинг</span></div>
+    <div class="certs">
+      <div><b>Google</b><span>Digital Marketing &amp; E-commerce — Professional Certificate (8 курсов)</span></div>
+      <div><b>Google</b><span>AI и промптинг — 4 курса</span></div>
+      <div><b>Meta</b><span>Marketing Analytics Foundation · Introduction to Data Analytics</span></div>
+      <div><b>Illinois Tech</b><span>Competitive Strategy · MBA Orientation</span></div>
+      <div><b>UC Davis</b><span>The Strategy of Content Marketing</span></div>
+      <div><b>Canva</b><span>2 проекта по дизайну</span></div>
+    </div>
+    <div class="chips"><span>19 сертификатов Coursera — ссылки на проверку на сайте</span></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-h">С кем работал</div>
+    <div class="logos">
+      <img src="../assets/logos/greenlight.png" style="--h:5mm" alt="Green Light">
+      <img src="../assets/logos/blackstar.png" style="--h:8mm" alt="Black Star">
+      <img src="../assets/logos/vw.png" style="--h:8mm" alt="Volkswagen">
+      <img src="../assets/logos/benetton.png" style="--h:6.5mm" alt="Benetton">
+      <img src="../assets/logos/dodo.png" style="--h:4.6mm" alt="Dodo Pizza">
+      <img src="../assets/logos/leffe.png" style="--h:8.5mm" alt="Leffe">
+      <img src="../assets/logos/tashir.png" style="--h:8.5mm" alt="Ташир">
+      <img src="../assets/logos/tokio.png" style="--h:6.5mm" alt="Tokio Inkarami">
+      <img src="../assets/logos/inmode.png" style="--h:7mm" alt="InMode">
+      <img src="../assets/logos/classys.png" style="--h:5.6mm" alt="Classys">
+      <img src="../assets/logos/lutronic.png" style="--h:4mm" alt="Lutronic">
+      <img src="../assets/logos/icoone.png" style="--h:6.5mm" alt="Icoone">
+      <img src="../assets/logos/creatio.png" style="--h:5.4mm" alt="Creatio">
+      <img src="../assets/logos/cloudflare.png" style="--h:6mm" alt="Cloudflare">
+      <img src="../assets/logos/ibm.png" style="--h:5.6mm" alt="IBM">
+      <img src="../assets/logos/cisco.png" style="--h:6.4mm" alt="Cisco">
+      <img src="../assets/logos/paloalto.png" style="--h:4.6mm" alt="Palo Alto Networks">
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="qr"><!--QR--></div>
+    <div>
+      <b>cmo.getdone.kz</b>
+      <p>Полная версия: фото с мероприятий, сертификаты с проверкой, бренды и приложения.</p>
+    </div>
+  </footer>
+</section>
+
+</body>
+</html>

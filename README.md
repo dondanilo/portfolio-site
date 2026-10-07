@@ -24,6 +24,12 @@ python3 tools/build.py
 open dist/index.html
 ```
 
+## PDF-резюме
+
+`cv/index.html` — резюме на 2 страницы A4 (тексты те же, что на сайте; при правках сайта обновлять и здесь).
+Собрать PDF: `node tools/build_cv.mjs` → `assets/Danil_Ulyanov_CV.pdf` (нужен Google Chrome). PDF коммитится,
+`tools/build.py` кладёт его в корень сайта — на него ведут все кнопки «CV / Резюме, PDF».
+
 ## Новое мероприятие
 
 ```sh

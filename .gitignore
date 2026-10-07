@@ -1,0 +1,12 @@
+# сборка — её делает GitHub Actions при каждом push
+dist/
+
+# черновые и исходные фото: тяжёлые и сайтом не используются (оригиналы — в iCloud)
+assets/photos/*.png
+assets/photos/_overview.jpg
+assets/photos/hero-portrait-v1-color*
+# иконки приложений IZI — блок приложений теперь нейтральный, они не нужны
+assets/apps/
+
+.DS_Store
+__pycache__/

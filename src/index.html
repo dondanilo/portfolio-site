@@ -449,10 +449,10 @@
     </div>
     <div class="stats">
       <div class="stat" data-reveal style="--d:0ms"><b data-count="12">0</b><i>+</i><span>лет в маркетинге и продажах</span></div>
-      <div class="stat" data-reveal style="--d:90ms"><b data-count="50">0</b><i>+</i><span>ниш: от HoReCa и ритейла до медэстетики и B2B-IT</span></div>
-      <div class="stat" data-reveal style="--d:180ms"><b data-count="100">0</b><i>+</i><span>выступлений и тренингов в России и Казахстане</span></div>
-      <div class="stat" data-reveal style="--d:270ms"><b data-count="3000">0</b><i>+</i><span>человек прошли мой курс по продюсированию</span></div>
-      <div class="stat" data-reveal style="--d:360ms"><b data-count="6">0</b><span>моих приложений в App Store</span></div>
+      <div class="stat" data-reveal style="--d:90ms"><b data-count="250" data-prefix="$" data-suffix="K">$0K</b><i>+</i><span>выручки, отслеженной до продажи: CRM, 1С, Roistat</span></div>
+      <div class="stat" data-reveal style="--d:180ms"><b data-count="50">0</b><i>+</i><span>ниш: от HoReCa и ритейла до медэстетики и B2B-IT</span></div>
+      <div class="stat" data-reveal style="--d:270ms"><b data-count="100">0</b><i>+</i><span>выступлений и тренингов в России и Казахстане</span></div>
+      <div class="stat" data-reveal style="--d:360ms"><b data-count="3000">0</b><i>+</i><span>человек прошли мой курс по продюсированию</span></div>
     </div>
   </section>
 
@@ -1006,13 +1006,13 @@
 
   // счётчики «добегают» до значения, когда блок появляется на экране
   function countUp(el) {
-    const end = +el.dataset.count;
-    if (reduceMotion) { el.textContent = end.toLocaleString("ru-RU"); return; }
+    const end = +el.dataset.count, pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
+    if (reduceMotion) { el.textContent = pre + end.toLocaleString("ru-RU") + suf; return; }
     const dur = 1400, t0 = performance.now();
     (function tick(now) {
       const k = Math.min(1, (now - t0) / dur);
       const e = 1 - Math.pow(1 - k, 3);
-      el.textContent = Math.round(end * e).toLocaleString("ru-RU");
+      el.textContent = pre + Math.round(end * e).toLocaleString("ru-RU") + suf;
       if (k < 1) requestAnimationFrame(tick);
     })(t0);
   }

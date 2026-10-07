@@ -41,7 +41,9 @@ try {
   writeFileSync(out, Buffer.from(pdf.result.data, 'base64'));
   console.log('assets/Danil_Ulyanov_CV.pdf', Math.round(Buffer.from(pdf.result.data, 'base64').length / 1024), 'KB');
 } finally {
+  const exited = new Promise(r => chrome.once('exit', r));
   chrome.kill('SIGKILL');
+  await Promise.race([exited, sleep(3000)]);          // Chrome дописывает профиль — ждём, потом чистим
   rmSync(tmpHtml, { force: true });
-  rmSync(profile, { recursive: true, force: true });
+  try { rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); } catch {}
 }

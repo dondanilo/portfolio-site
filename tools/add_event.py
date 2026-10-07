@@ -3,7 +3,7 @@
 Пример:
   venv/bin/python tools/add_event.py --id tokio-launch \
       --title "Официальный запуск бренда Tokio Inkarami" --date "20 мая 2025" --city "Алматы" \
-      --role "Руководитель маркетинга" --logo assets/logos/tokio.png \
+      --iso 2025-05-20 --logo assets/logos/tokio.png \
       --text "Короткое описание" photo1.jpg photo2.jpg ...
 
 Первое фото — обложка (крупная плитка). Для каждого фото делаются две версии:
@@ -21,6 +21,7 @@ ap.add_argument("--role", default="")
 ap.add_argument("--scale", default="")
 ap.add_argument("--text", default="")
 ap.add_argument("--logo", default="")
+ap.add_argument("--iso", default="", help="дата ГГГГ-ММ-ДД — по ней мероприятия сортируются, новые сверху")
 ap.add_argument("photos", nargs="+")
 a = ap.parse_args()
 
@@ -39,8 +40,8 @@ for i, src in enumerate(a.photos, 1):
 
 db_path = root / "content/events.json"
 db = json.loads(db_path.read_text(encoding="utf-8")) if db_path.exists() else []
-entry = {k: getattr(a, k) for k in ("id", "title", "date", "city", "role", "scale", "text", "logo")}
+entry = {k: getattr(a, k) for k in ("id", "title", "date", "iso", "city", "role", "scale", "text", "logo")}
 entry["photos"] = photos
-db = [e for e in db if e["id"] != a.id] + [entry]
+db = sorted([e for e in db if e["id"] != a.id] + [entry], key=lambda e: e.get("iso", ""), reverse=True)
 db_path.write_text(json.dumps(db, ensure_ascii=False, indent=1), encoding="utf-8")
 print(f"{a.id}: {len(photos)} фото → assets/events/{a.id}/, всего мероприятий: {len(db)}")

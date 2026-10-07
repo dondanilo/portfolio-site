@@ -1,35 +1,115 @@
 <!doctype html>
-<html lang="ru">
+<html lang="{{_lang}}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Данил Ульянов — маркетолог, CMO</title>
+<title>{{Данил Ульянов — маркетолог, CMO}}</title>
 <!-- пока сайт в работе — не показываем его в поисковиках; убрать эту строку, когда всё будет готово -->
 <meta name="robots" content="noindex">
-<meta name="description" content="Данил Ульянов — маркетолог, ищу роль CMO. 12+ лет в маркетинге и продажах, B2B-лидген, AI в маркетинге, мобильные приложения, event-маркетинг.">
+<meta name="description" content="{{Данил Ульянов — маркетолог, ищу роль CMO. 12+ лет в маркетинге и продажах, B2B-лидген, AI в маркетинге, мобильные приложения, event-маркетинг.}}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Данил Ульянов — маркетолог, который считает">
-<meta property="og:description" content="12+ лет в маркетинге и продажах. Ищу роль CMO.">
-<meta property="og:url" content="https://cmo.getdone.kz/">
-<meta property="og:image" content="https://cmo.getdone.kz/og.jpg">
+<meta property="og:title" content="{{Данил Ульянов — маркетолог, который считает}}">
+<meta property="og:description" content="{{12+ лет в маркетинге и продажах. Ищу роль CMO.}}">
+<meta property="og:url" content="https://cmo.getdone.kz/{{_path}}">
+<meta property="og:locale" content="{{_oglocale}}">
+<!--HREFLANG-->
+<meta property="og:image" content="https://cmo.getdone.kz/{{_og}}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0b'/%3E%3Crect x='10' y='10' width='12' height='12' transform='rotate(45 16 16)' fill='%23c8ff2e'/%3E%3C/svg%3E">
+<script>
+  // тема: выбор посетителя (запомнен) или системная настройка; ставим до отрисовки, чтобы страница не мигала
+  (function () {
+    var t; try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    document.documentElement.dataset.theme = t;
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
+  :root, [data-theme="dark"] {
     --bg: #0a0a0b;
     --fg: #f2f1ec;
+    --fg2: #d3d4da;            /* сильный вторичный текст */
+    --fg3: #b9bac2;            /* ссылки меню, подписи, чипы */
+    --fg4: #a3a4ad;            /* подзаголовки, подписи цифр */
+    --fg5: #9a9ba4;            /* описания */
+    --fg-dim: #6f707a;
     --muted: #8a8c97;
+    --quote: #e9e8e2;
     --accent: #c8ff2e;
+    --accent-ink: #c8ff2e;     /* акцент как цвет текста (в светлой теме темнее) */
     --line: rgba(255, 255, 255, .09);
+    --surface: rgba(255, 255, 255, .02);
+    --surface-2: rgba(255, 255, 255, .025);
+    --surface-3: rgba(255, 255, 255, .05);
+    --border-2: rgba(255, 255, 255, .16);
+    --border-3: rgba(255, 255, 255, .22);
+    --border-4: rgba(255, 255, 255, .45);
+    --underline: rgba(255, 255, 255, .25);
+    --glass: rgba(10, 10, 11, .35);
+    --glass-2: rgba(10, 10, 11, .55);
+    --shade-rgb: 10, 10, 11;
+    --hero-bg: #1a1b1e;
+    --logo-filter: none;
+    --ph-bg: #151517;
+    --stroke-title: rgba(242, 241, 236, .85);
+    --sync-track: rgba(255, 255, 255, .08);
+    --portrait-shadow: rgba(0, 0, 0, .45);
+    --rh-shadow: rgba(0, 0, 0, .55);
+    --rh-line: rgba(255, 255, 255, .28);
+    --cert-shadow: 0 26px 50px -14px rgba(0, 0, 0, .8);
+    --cert-shadow-hover: 0 34px 60px -14px rgba(0, 0, 0, .85);
+    --cert-main-border: rgba(200, 255, 46, .22);
+    color-scheme: dark;
     --pad: clamp(16px, 4vw, 56px);
     --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
+  [data-theme="light"] {
+    --bg: #f3f3ef;
+    --fg: #121214;
+    --fg2: #2a2b30;
+    --fg3: #45474f;
+    --fg4: #5a5c64;
+    --fg5: #62646d;
+    --fg-dim: #9a9ca4;
+    --muted: #6c6e77;
+    --quote: #1b1c20;
+    --accent-ink: #4f7a00;
+    --line: rgba(0, 0, 0, .1);
+    --surface: rgba(0, 0, 0, .025);
+    --surface-2: rgba(0, 0, 0, .035);
+    --surface-3: rgba(0, 0, 0, .05);
+    --border-2: rgba(0, 0, 0, .18);
+    --border-3: rgba(0, 0, 0, .2);
+    --border-4: rgba(0, 0, 0, .45);
+    --underline: rgba(0, 0, 0, .28);
+    --glass: rgba(255, 255, 255, .5);
+    --glass-2: rgba(255, 255, 255, .78);
+    --shade-rgb: 243, 243, 239;
+    --hero-bg: #e6e6e2;
+    --logo-filter: invert(1);
+    --ph-bg: #e2e2de;
+    --stroke-title: rgba(18, 18, 20, .85);
+    --sync-track: rgba(0, 0, 0, .1);
+    --portrait-shadow: rgba(0, 0, 0, .2);
+    --rh-shadow: rgba(0, 0, 0, .22);
+    --rh-line: rgba(0, 0, 0, .3);
+    --cert-shadow: 0 20px 40px -16px rgba(0, 0, 0, .28);
+    --cert-shadow-hover: 0 28px 50px -16px rgba(0, 0, 0, .35);
+    --cert-main-border: rgba(79, 122, 0, .35);
+    color-scheme: light;
+  }
+  /* лаймовый на белом не читается — в светлой теме акцентные слова выделены маркером */
+  [data-theme="light"] h1 em, [data-theme="light"] .section h2 em, [data-theme="light"] .contact-title em {
+    color: var(--fg); padding: 0 .06em;
+    background: linear-gradient(transparent 60%, var(--accent) 60%, var(--accent) 90%, transparent 90%);
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  html, body { background: var(--bg); color: var(--fg); }
+  html, body { background: var(--bg); color: var(--fg); transition: background-color .35s, color .35s; }
   body {
     font-family: "Inter Tight", system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -37,7 +117,7 @@
   }
   a { color: inherit; text-decoration: none; }
 
-  .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: #1a1b1e; }
+  .hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--hero-bg); }
 
   /* жидкий металл: холст в половинном разрешении, браузер растягивает его на весь экран */
   #metal { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
@@ -46,8 +126,8 @@
   .shade {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background:
-      linear-gradient(90deg, rgba(10, 10, 11, .86) 0%, rgba(10, 10, 11, .62) 34%, rgba(10, 10, 11, .1) 62%, transparent 75%),
-      linear-gradient(180deg, rgba(10, 10, 11, .6) 0%, transparent 16%, transparent 72%, var(--bg) 100%);
+      linear-gradient(90deg, rgba(var(--shade-rgb), .86) 0%, rgba(var(--shade-rgb), .62) 34%, rgba(var(--shade-rgb), .1) 62%, transparent 75%),
+      linear-gradient(180deg, rgba(var(--shade-rgb), .6) 0%, transparent 16%, transparent 72%, var(--bg) 100%);
   }
 
   nav {
@@ -60,20 +140,32 @@
   nav .brand b { font-weight: 500; }
   nav .brand span { color: var(--muted); }
   nav ul { display: flex; gap: 28px; list-style: none; align-items: center; }
-  nav ul a { color: #b9bac2; transition: color .2s; }
+  nav ul a { color: var(--fg3); transition: color .2s; }
   nav ul a:hover { color: var(--fg); }
+  .lang { display: flex; gap: 2px; }
+  nav ul .lang a { padding: 6px 5px; color: var(--muted); }
+  nav ul .lang a:hover { color: var(--fg); }
+  nav ul .lang a[aria-current] { color: var(--fg); box-shadow: inset 0 -1px 0 var(--fg); }
+  .theme-tg {
+    display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--border-3); background: var(--glass); color: var(--fg); cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .theme-tg:hover { border-color: var(--border-4); background: var(--glass-2); }
+  .theme-tg svg { width: 17px; height: 17px; }
+  [data-theme="dark"] .theme-tg .i-moon, [data-theme="light"] .theme-tg .i-sun { display: none; }
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .22);
-    background: rgba(10, 10, 11, .35);
+    padding: 10px 16px; border-radius: 999px; border: 1px solid var(--border-3);
+    background: var(--glass);
     color: var(--fg) !important; transition: border-color .2s, background .2s;
   }
-  .pill:hover { border-color: rgba(255, 255, 255, .45); background: rgba(10, 10, 11, .55); }
+  .pill:hover { border-color: var(--border-4); background: var(--glass-2); }
 
   .portrait {
     position: absolute; z-index: 2; right: clamp(0px, 5vw, 96px); bottom: 0; height: 94svh; width: auto;
     pointer-events: none; user-select: none;
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, .45));
+    filter: drop-shadow(0 30px 60px var(--portrait-shadow));
   }
 
   .copy {
@@ -82,13 +174,13 @@
   }
   .eyebrow {
     display: flex; gap: 10px; align-items: center;
-    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #a3a4ad;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg4);
   }
   .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
   h1 { margin: 26px 0 28px; font-weight: 600; font-size: clamp(46px, 7.2vw, 118px); line-height: .9; letter-spacing: -.045em; }
-  h1 .hi { display: block; margin-bottom: .45em; font-size: .36em; font-weight: 500; letter-spacing: -.02em; color: #a3a4ad; }
+  h1 .hi { display: block; margin-bottom: .45em; font-size: .36em; font-weight: 500; letter-spacing: -.02em; color: var(--fg4); }
   h1 em { font-style: normal; color: var(--accent); }
-  .lead { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.4; color: #d3d4da; }
+  .lead { font-size: clamp(17px, 1.5vw, 21px); line-height: 1.4; color: var(--fg2); }
   .slot { display: inline-grid; vertical-align: bottom; overflow: hidden; height: 1.4em; }
   .slot span {
     grid-area: 1 / 1; white-space: nowrap; color: var(--fg);
@@ -105,8 +197,8 @@
   }
   .btn.primary { background: var(--accent); color: #0a0b10; }
   .btn.primary:hover { transform: translateY(-2px); }
-  .btn.ghost { border: 1px solid rgba(255, 255, 255, .22); background: rgba(10, 10, 11, .35); }
-  .btn.ghost:hover { border-color: rgba(255, 255, 255, .45); }
+  .btn.ghost { border: 1px solid var(--border-3); background: var(--glass); }
+  .btn.ghost:hover { border-color: var(--border-4); }
 
   .scroll-cue {
     position: absolute; z-index: 6; left: var(--pad); bottom: 28px;
@@ -115,14 +207,18 @@
 
 
   @media (max-width: 860px) {
-    nav ul li:not(:last-child) { display: none; }
+    nav ul li.nav-link { display: none; }
+    nav ul { gap: 10px; }
+    nav .brand span, .pill .pdf { display: none; }
+    .theme-tg { width: 36px; height: 36px; }
+    .pill { padding: 9px 13px; }
     .portrait {
       height: 70svh; top: 56px; bottom: auto; right: auto; left: 50%; transform: translateX(-62%);
       -webkit-mask-image: linear-gradient(#000 58%, transparent 96%); mask-image: linear-gradient(#000 58%, transparent 96%);
       filter: none; /* без тени: её обрезала бы маска по краю картинки */
     }
     .shade {
-      background: linear-gradient(180deg, rgba(10, 10, 11, .7) 0%, transparent 14%, transparent 35%, rgba(10, 10, 11, .7) 58%, var(--bg) 92%);
+      background: linear-gradient(180deg, rgba(var(--shade-rgb), .7) 0%, transparent 14%, transparent 35%, rgba(var(--shade-rgb), .7) 58%, var(--bg) 92%);
     }
     .copy { top: auto; bottom: 40px; right: var(--pad); transform: none; max-width: none; }
     h1 { margin: 16px 0 18px; font-size: clamp(38px, 11.5vw, 64px); }
@@ -144,10 +240,10 @@
   .rh-chrome b {
     border-radius: 3px;
     background: linear-gradient(135deg, #ffffff 0%, #c9ced6 26%, #5f666f 50%, #eef1f4 72%, #8d949e 100%);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .7);
+    box-shadow: 0 12px 24px var(--rh-shadow), inset 0 1px 0 rgba(255, 255, 255, .7);
     opacity: .85;
   }
-  .rh-line b { border: 1px solid rgba(255, 255, 255, .28); }
+  .rh-line b { border: 1px solid var(--rh-line); }
   .rh-lime b { background: var(--accent); box-shadow: 0 0 18px rgba(200, 255, 46, .55); opacity: .9; }
   @keyframes bob {
     0%, 100% { transform: translateY(0) rotate(45deg); }
@@ -169,7 +265,7 @@
   .sec-num::before { content: counter(sec, decimal-leading-zero) " / "; }
   .section h2 { font-size: clamp(38px, 5.4vw, 84px); font-weight: 600; line-height: .95; letter-spacing: -.04em; }
   .section h2 em, .contact-title em { font-style: normal; color: var(--accent); }
-  .sec-lead { margin-top: 24px; max-width: 620px; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; color: #b9bac2; }
+  .sec-lead { margin-top: 24px; max-width: 620px; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; color: var(--fg3); }
 
   /* появление при прокрутке — только opacity/transform, это дёшево */
   [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); transition-delay: var(--d, 0ms); }
@@ -181,8 +277,8 @@
   .stat + .stat { padding-left: 24px; }
   .stat:last-child { border-right: 0; }
   .stat b { font-size: clamp(52px, 6vw, 96px); font-weight: 600; letter-spacing: -.05em; line-height: 1; font-variant-numeric: tabular-nums; }
-  .stat i { font-style: normal; font-size: clamp(36px, 4vw, 64px); font-weight: 600; color: var(--accent); margin-left: 2px; }
-  .stat span { display: block; margin-top: 18px; max-width: 220px; font-size: 15px; line-height: 1.45; color: #a3a4ad; }
+  .stat i { font-style: normal; font-size: clamp(36px, 4vw, 64px); font-weight: 600; color: var(--accent-ink); margin-left: 2px; }
+  .stat span { display: block; margin-top: 18px; max-width: 220px; font-size: 15px; line-height: 1.45; color: var(--fg4); }
 
   /* ---------- 03 · бренды ---------- */
   .marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
@@ -191,7 +287,7 @@
   .marquee-track.reverse { animation-direction: reverse; animation-duration: 50s; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
   .marquee-set { display: flex; align-items: center; gap: clamp(56px, 7vw, 112px); padding-right: clamp(56px, 7vw, 112px); }
-  .marquee-set img { height: var(--h, 40px); width: auto; opacity: .7; transition: opacity .3s; }
+  .marquee-set img { height: var(--h, 40px); width: auto; opacity: .7; transition: opacity .3s; filter: var(--logo-filter); }
   .marquee-set img:hover { opacity: 1; }
   @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -201,71 +297,71 @@
     display: grid; grid-template-columns: 180px minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 32px; align-items: baseline;
     padding: 30px 0; border-bottom: 1px solid var(--line); transition: background .3s;
   }
-  .path li:hover { background: linear-gradient(90deg, rgba(255, 255, 255, .025), transparent); }
+  .path li:hover { background: linear-gradient(90deg, var(--surface-2), transparent); }
   .path .tag { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-  .path .tag-now { color: var(--accent); }
+  .path .tag-now { color: var(--accent-ink); }
   .path .tag-now::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); vertical-align: 1px; }
   .path h3 { font-size: clamp(24px, 2.6vw, 40px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
-  .path .role { color: #d3d4da; font-size: 16px; }
-  .path .note { grid-column: 2 / 4; margin-top: 12px; max-width: 760px; color: #9a9ba4; font-size: 15px; line-height: 1.5; }
+  .path .role { color: var(--fg2); font-size: 16px; }
+  .path .note { grid-column: 2 / 4; margin-top: 12px; max-width: 760px; color: var(--fg5); font-size: 15px; line-height: 1.5; }
 
   /* ---------- 05 · кейсы ---------- */
   .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .case { position: relative; padding: 28px; min-height: 320px; border: 1px dashed rgba(255, 255, 255, .16); border-radius: 20px; background: rgba(255, 255, 255, .015); }
+  .case { position: relative; padding: 28px; min-height: 320px; border: 1px dashed var(--border-2); border-radius: 20px; background: var(--surface); }
   .case h3 { margin: 18px 0 26px; font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
   .case dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; font-size: 14px; }
   .case dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-  .case dd { color: #6f707a; }
-  .chip { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .18); color: #a3a4ad; }
+  .case dd { color: var(--fg-dim); }
+  .chip { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; border: 1px solid var(--border-2); color: var(--fg4); }
 
   /* ---------- 06 · подход CMO ---------- */
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
   .pillar { padding: 32px 28px 36px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .3s; }
-  .pillar:hover { background: rgba(255, 255, 255, .025); }
-  .pillar span { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+  .pillar:hover { background: var(--surface-2); }
+  .pillar span { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); }
   .pillar h3 { margin: 18px 0 10px; font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
-  .pillar p { color: #9a9ba4; font-size: 15px; line-height: 1.5; }
-  .quote { margin-top: clamp(64px, 10vh, 112px); max-width: 1080px; font-size: clamp(26px, 3.2vw, 48px); line-height: 1.15; letter-spacing: -.025em; font-weight: 500; color: #e9e8e2; }
+  .pillar p { color: var(--fg5); font-size: 15px; line-height: 1.5; }
+  .quote { margin-top: clamp(64px, 10vh, 112px); max-width: 1080px; font-size: clamp(26px, 3.2vw, 48px); line-height: 1.15; letter-spacing: -.025em; font-weight: 500; color: var(--quote); }
 
   /* ---------- 07 · event-маркетинг: отдельный экран ---------- */
   .events { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
   .events-title { margin: 6px 0 4px; font-size: clamp(64px, 12vw, 200px) !important; line-height: .86 !important; letter-spacing: -.055em !important; }
   /* контурные буквы не должны наползать друг на друга — иначе видны линии пересечений */
-  .events-title span { color: var(--bg); -webkit-text-stroke: 3px rgba(242, 241, 236, .85); paint-order: stroke fill; letter-spacing: 0; }
+  .events-title span { color: var(--bg); -webkit-text-stroke: 3px var(--stroke-title); paint-order: stroke fill; letter-spacing: 0; }
   .events-list { display: grid; gap: clamp(56px, 9vh, 96px); margin-top: clamp(48px, 8vh, 88px); }
   /* статус «архив выгружается»: мероприятия были, материалы ещё не загружены */
-  .event-sync { padding: 22px 24px; border-radius: 16px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  .event-sync { padding: 22px 24px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
   .sync-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
   .sync-row b { font-weight: 500; color: var(--fg); }
   .sync-note { color: var(--muted); }
   .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); animation: syncPulse 1.6s ease-in-out infinite; }
   @keyframes syncPulse { 50% { opacity: .25; } }
-  .sync-bar { position: relative; height: 2px; margin-top: 18px; background: rgba(255, 255, 255, .08); border-radius: 2px; overflow: hidden; }
+  .sync-bar { position: relative; height: 2px; margin-top: 18px; background: var(--sync-track); border-radius: 2px; overflow: hidden; }
   .sync-bar i { position: absolute; top: 0; bottom: 0; width: 30%; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: syncRun 2.4s cubic-bezier(.5, 0, .5, 1) infinite; }
   @keyframes syncRun { from { left: -30%; } to { left: 100%; } }
 
   /* карточка мероприятия: шапка + альбом-мозаика */
   .event-head { display: grid; grid-template-columns: 64px 1fr auto; gap: 24px; align-items: start; margin-bottom: 24px; }
-  .event-num { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 8px; }
+  .event-num { font-family: var(--mono); font-size: 13px; color: var(--accent-ink); padding-top: 8px; }
   .event-head h3 { font-size: clamp(26px, 2.8vw, 42px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
   .event-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-  .event-meta span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #b9bac2; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; }
-  .event-text { margin-top: 14px; max-width: 680px; color: #a3a4ad; font-size: 16px; line-height: 1.5; }
-  .event-logo { height: 54px; width: auto; opacity: .8; margin-top: 4px; }
+  .event-meta span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; }
+  .event-text { margin-top: 14px; max-width: 680px; color: var(--fg4); font-size: 16px; line-height: 1.5; }
+  .event-logo { height: 54px; width: auto; opacity: .8; margin-top: 4px; filter: var(--logo-filter); }
   .album { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: repeat(2, 1fr); gap: 10px; height: clamp(380px, 44vw, 660px); }
-  .ph { position: relative; padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: #151517; cursor: zoom-in; }
+  .ph { position: relative; padding: 0; border: 0; border-radius: 14px; overflow: hidden; background: var(--ph-bg); cursor: zoom-in; }
   .ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.2, .7, .2, 1), filter .5s; filter: saturate(.92) brightness(.92); }
   .ph:hover img { transform: scale(1.05); filter: none; }
   .ph-cover { grid-row: span 2; }
   .ph:nth-child(n + 6) { display: none; }
-  .ph-more { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; background: rgba(10, 10, 11, .62); font-size: clamp(32px, 3vw, 48px); font-weight: 600; letter-spacing: -.03em; color: var(--fg); }
+  .ph-more { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; background: rgba(10, 10, 11, .62); font-size: clamp(32px, 3vw, 48px); font-weight: 600; letter-spacing: -.03em; color: #f2f1ec; }
   .ph-more small { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #b9bac2; font-weight: 400; }
 
   /* полноэкранный просмотр фото */
   .lb { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(6, 6, 7, .96); opacity: 0; pointer-events: none; transition: opacity .3s; touch-action: none; }
   .lb.open { opacity: 1; pointer-events: auto; }
   .lb img { max-width: 92vw; max-height: 86vh; border-radius: 10px; box-shadow: 0 40px 100px rgba(0, 0, 0, .7); user-select: none; -webkit-user-drag: none; }
-  .lb button { position: absolute; border: 1px solid rgba(255, 255, 255, .2); background: rgba(10, 10, 11, .5); color: var(--fg); width: 52px; height: 52px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: border-color .2s, color .2s; }
+  .lb button { position: absolute; border: 1px solid rgba(255, 255, 255, .2); background: rgba(10, 10, 11, .5); color: #f2f1ec; width: 52px; height: 52px; border-radius: 50%; font-size: 20px; cursor: pointer; transition: border-color .2s, color .2s; }
   .lb button:hover { border-color: var(--accent); color: var(--accent); }
   .lb .lb-prev { left: 24px; top: 50%; transform: translateY(-50%); }
   .lb .lb-next { right: 24px; top: 50%; transform: translateY(-50%); }
@@ -275,19 +371,19 @@
 
   /* ---------- 08 · AI ---------- */
   .ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .ai-card { position: relative; padding: 28px 24px; border-radius: 20px; background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .012)); border: 1px solid var(--line); overflow: hidden; }
+  .ai-card { position: relative; padding: 28px 24px; border-radius: 20px; background: linear-gradient(160deg, var(--surface-3), var(--surface)); border: 1px solid var(--line); overflow: hidden; }
   .ai-card::before { content: ""; position: absolute; inset: 0 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: .6; }
   .ai-card h3 { font-size: 21px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; margin-bottom: 14px; }
-  .ai-card p { color: #9a9ba4; font-size: 15px; line-height: 1.5; }
+  .ai-card p { color: var(--fg5); font-size: 15px; line-height: 1.5; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-  .chips span { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); color: #b9bac2; }
+  .chips span { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg3); }
 
   /* ---------- 08 · приложения: объёмные иконки сторов ---------- */
   .apps-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
   #apps h2 { font-size: clamp(36px, 4.4vw, 68px); }
   .apps-facts { display: flex; gap: 40px; margin-bottom: 8px; }
   .apps-facts b { display: block; font-size: clamp(44px, 4.6vw, 72px); font-weight: 600; letter-spacing: -.05em; line-height: 1; }
-  .apps-facts span { display: block; margin-top: 10px; max-width: 210px; color: #a3a4ad; font-size: 15px; line-height: 1.45; }
+  .apps-facts span { display: block; margin-top: 10px; max-width: 210px; color: var(--fg4); font-size: 15px; line-height: 1.45; }
   .stores { display: flex; justify-content: center; gap: clamp(20px, 3vw, 44px); perspective: 1100px; }
   .store { margin: 0; text-align: center; animation: float 6s ease-in-out infinite; }
   .store + .store { animation-delay: -3s; }
@@ -302,6 +398,7 @@
     box-shadow: 0 60px 90px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(0, 0, 0, .6),
                 inset 0 1px 0 rgba(255, 255, 255, .16), inset 0 -18px 36px rgba(0, 0, 0, .55);
   }
+  [data-theme="light"] .store-tile { box-shadow: 0 40px 60px -28px rgba(0, 0, 0, .45), 0 0 0 1px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .16), inset 0 -18px 36px rgba(0, 0, 0, .55); }
   /* блик «студийного света», ездит за курсором */
   .store-tile::after {
     content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -309,11 +406,11 @@
     mix-blend-mode: screen;
   }
   .store-glyph { width: 74%; height: 74%; transform: translateZ(46px); filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .65)) drop-shadow(0 2px 2px rgba(0, 0, 0, .5)); }
-  .store figcaption { margin-top: 26px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #b9bac2; }
+  .store figcaption { margin-top: 26px; font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg3); }
 
   /* ---------- 09 · образование ---------- */
-  .edu .note a { color: #d3d4da; border-bottom: 1px solid rgba(255, 255, 255, .25); }
-  .edu .note a:hover { color: var(--accent); border-color: var(--accent); }
+  .edu .note a { color: var(--fg2); border-bottom: 1px solid var(--underline); }
+  .edu .note a:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
   .certs-head { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin: clamp(64px, 10vh, 104px) 0 28px; }
   .certs-head h3 { font-size: clamp(28px, 3vw, 44px); font-weight: 600; letter-spacing: -.03em; }
   .certs-head p { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
@@ -323,22 +420,22 @@
   .certs-marquee .marquee-set { gap: 22px; padding-right: 22px; align-items: flex-start; }
   .certs-marquee a {
     display: block; border-radius: 10px; overflow: hidden; flex: none;
-    box-shadow: 0 26px 50px -14px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .1);
+    box-shadow: var(--cert-shadow), 0 0 0 1px var(--line);
     transition: transform .45s cubic-bezier(.2, .7, .2, 1), box-shadow .45s;
   }
-  .certs-marquee a:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 34px 60px -14px rgba(0, 0, 0, .85), 0 0 0 2px var(--accent); }
+  .certs-marquee a:hover { transform: translateY(-8px) scale(1.04); box-shadow: var(--cert-shadow-hover), 0 0 0 2px var(--accent); }
   .certs-marquee .marquee-set img { display: block; height: clamp(150px, 15vw, 220px); width: auto; opacity: 1; }
   .certs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .cert { padding: 26px 26px 22px; border-radius: 20px; border: 1px solid var(--line); background: rgba(255, 255, 255, .02); }
-  .cert-main { grid-row: span 2; background: linear-gradient(160deg, rgba(200, 255, 46, .06), rgba(255, 255, 255, .015) 55%); border-color: rgba(200, 255, 46, .22); }
-  .cert .issuer { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .cert { padding: 26px 26px 22px; border-radius: 20px; border: 1px solid var(--line); background: var(--surface); }
+  .cert-main { grid-row: span 2; background: linear-gradient(160deg, rgba(200, 255, 46, .06), var(--surface) 55%); border-color: var(--cert-main-border); }
+  .cert .issuer { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); }
   .cert h4 { margin: 14px 0 6px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 600; letter-spacing: -.02em; line-height: 1.15; }
   .cert-sub { margin: 14px 0 4px; color: var(--muted); font-size: 14px; }
   .cert ul { list-style: none; margin-top: 12px; }
   .cert li { border-top: 1px solid var(--line); }
-  .cert li a, .cert li.plain { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; font-size: 15px; line-height: 1.35; color: #d3d4da; transition: color .2s; }
-  .cert li.plain { color: #8a8c97; }
-  .cert li a:hover, .cert h4 a:hover { color: var(--accent); }
+  .cert li a, .cert li.plain { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; font-size: 15px; line-height: 1.35; color: var(--fg2); transition: color .2s; }
+  .cert li.plain { color: var(--muted); }
+  .cert li a:hover, .cert h4 a:hover { color: var(--accent-ink); }
   .cert i { font-style: normal; color: var(--muted); }
   .cert h4 i { margin-left: 10px; font-size: .7em; }
 
@@ -346,8 +443,8 @@
   .contact { padding-bottom: 48px; }
   .contact-title { margin: 8px 0 48px; font-size: clamp(52px, 9vw, 150px) !important; line-height: .9 !important; letter-spacing: -.05em !important; }
   .contact-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 36px; font-size: clamp(18px, 1.8vw, 26px); }
-  .contact-links a:not(.btn) { border-bottom: 1px solid rgba(255, 255, 255, .25); padding-bottom: 4px; transition: border-color .2s, color .2s; }
-  .contact-links a:not(.btn):hover { color: var(--accent); border-color: var(--accent); }
+  .contact-links a:not(.btn) { border-bottom: 1px solid var(--underline); padding-bottom: 4px; transition: border-color .2s, color .2s; }
+  .contact-links a:not(.btn):hover { color: var(--accent-ink); border-color: var(--accent-ink); }
   .contact footer { margin-top: clamp(96px, 16vh, 180px); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; color: var(--muted); }
 
   @media (max-width: 1100px) {
@@ -397,11 +494,11 @@
 </head>
 <body>
 <canvas id="topo" aria-hidden="true"></canvas>
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="{{Просмотр фото}}">
   <img alt="">
-  <button class="lb-prev" type="button" aria-label="Предыдущее">←</button>
-  <button class="lb-next" type="button" aria-label="Следующее">→</button>
-  <button class="lb-close" type="button" aria-label="Закрыть">✕</button>
+  <button class="lb-prev" type="button" aria-label="{{Предыдущее}}">←</button>
+  <button class="lb-next" type="button" aria-label="{{Следующее}}">→</button>
+  <button class="lb-close" type="button" aria-label="{{Закрыть}}">✕</button>
   <span class="lb-count"></span>
 </div>
 
@@ -410,27 +507,32 @@
   <div class="shade" aria-hidden="true"></div>
 
   <nav>
-    <div class="brand"><b>Данил</b><span>портфолио · 2026</span></div>
+    <div class="brand"><b>{{Данил}}</b><span>{{портфолио · 2026}}</span></div>
     <ul>
-      <li><a href="#path">Опыт</a></li>
-      <li><a href="#contact">Контакты</a></li>
-      <li><a class="pill" href="Danil_Ulyanov_CV.pdf" download="Danil_Ulyanov_CV.pdf">CV · PDF ↓</a></li>
+      <li class="nav-link"><a href="#path">{{Опыт}}</a></li>
+      <li class="nav-link"><a href="#contact">{{Контакты}}</a></li>
+      <li class="lang"><!--LANGS--></li>
+      <li><button class="theme-tg" type="button" aria-label="{{Светлая / тёмная тема}}" title="{{Светлая / тёмная тема}}">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 14.6A8.3 8.3 0 0 1 9.4 3.8a8.3 8.3 0 1 0 10.8 10.8Z"/></svg>
+      </button></li>
+      <li><a class="pill" href="{{_p}}{{_cv}}" download="{{_cv}}">CV<span class="pdf"> · PDF</span> ↓</a></li>
     </ul>
   </nav>
 
-  <img class="portrait" src="@@assets/photos/hero-portrait-graded.webp" alt="Данил">
+  <img class="portrait" src="@@assets/photos/hero-portrait-graded.webp" alt="{{Данил}}">
 
   <div class="copy">
-    <div class="eyebrow"><span class="dot"></span>Открыт к предложениям</div>
-    <h1><span class="hi">Привет, я Данил —</span>маркетолог, который <em>считает.</em></h1>
-    <p class="lead">Делаю так, чтобы <span class="slot" id="slot"></span></p>
+    <div class="eyebrow"><span class="dot"></span>{{Открыт к предложениям}}</div>
+    <h1><span class="hi">{{Привет, я Данил —}}</span>{{маркетолог, который <em>считает.</em>}}</h1>
+    <p class="lead">{{Делаю так, чтобы}} <span class="slot" id="slot"><span>{{реклама окупалась.}}</span><span>{{лиды доходили до продаж.}}</span><span>{{продукт находил своих людей.}}</span></span></p>
     <div class="cta">
-      <a class="btn primary" href="#path">Смотреть опыт ↓</a>
-      <a class="btn ghost" href="Danil_Ulyanov_CV.pdf" download="Danil_Ulyanov_CV.pdf">Резюме, PDF ↓</a>
+      <a class="btn primary" href="#path">{{Смотреть опыт ↓}}</a>
+      <a class="btn ghost" href="{{_p}}{{_cv}}" download="{{_cv}}">{{Резюме, PDF ↓}}</a>
     </div>
   </div>
 
-  <div class="scroll-cue">↓ Скролл</div>
+  <div class="scroll-cue">{{↓ Скролл}}</div>
 </section>
 
 <main>
@@ -455,23 +557,23 @@
   <!-- 02 · Цифры -->
   <section class="section" id="numbers">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">Цифры</div>
-      <h2>12 лет маркетинга —<br>в цифрах.</h2>
+      <div class="sec-num">{{Цифры}}</div>
+      <h2>{{12 лет маркетинга —<br>в цифрах.}}</h2>
     </div>
     <div class="stats">
-      <div class="stat" data-reveal style="--d:0ms"><b data-count="12">0</b><i>+</i><span>лет в маркетинге и продажах</span></div>
-      <div class="stat" data-reveal style="--d:90ms"><b data-count="250" data-prefix="$" data-suffix="K">$0K</b><i>+</i><span>выручки, отслеженной до продажи: CRM, 1С, Roistat</span></div>
-      <div class="stat" data-reveal style="--d:180ms"><b data-count="50">0</b><i>+</i><span>ниш: от HoReCa и ритейла до медэстетики и B2B-IT</span></div>
-      <div class="stat" data-reveal style="--d:270ms"><b data-count="100">0</b><i>+</i><span>выступлений и тренингов в России и Казахстане</span></div>
-      <div class="stat" data-reveal style="--d:360ms"><b data-count="3000">0</b><i>+</i><span>человек прошли мой курс по продюсированию</span></div>
+      <div class="stat" data-reveal style="--d:0ms"><b data-count="12">0</b><i>+</i><span>{{лет в маркетинге и продажах}}</span></div>
+      <div class="stat" data-reveal style="--d:90ms"><b data-count="250" data-prefix="$" data-suffix="K">$0K</b><i>+</i><span>{{выручки, отслеженной до продажи: CRM, 1С, Roistat}}</span></div>
+      <div class="stat" data-reveal style="--d:180ms"><b data-count="50">0</b><i>+</i><span>{{ниш: от HoReCa и ритейла до медэстетики и B2B-IT}}</span></div>
+      <div class="stat" data-reveal style="--d:270ms"><b data-count="100">0</b><i>+</i><span>{{выступлений и тренингов в России и Казахстане}}</span></div>
+      <div class="stat" data-reveal style="--d:360ms"><b data-count="3000">0</b><i>+</i><span>{{человек прошли мой курс по продюсированию}}</span></div>
     </div>
   </section>
 
   <!-- 03 · Бренды: только логотипы -->
   <section class="section brands" id="brands">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">Бренды</div>
-      <h2>С кем работал.</h2>
+      <div class="sec-num">{{Бренды}}</div>
+      <h2>{{С кем работал.}}</h2>
     </div>
     <div class="marquee" data-reveal>
       <div class="marquee-track">
@@ -484,7 +586,7 @@
           <img src="@@assets/logos/dodo.png" alt="Dodo Pizza" style="--h:40px">
           <img src="@@assets/logos/leffe.png" alt="Leffe" style="--h:76px">
           <img src="@@assets/logos/pentrilo.png" alt="Pentrilo" style="--h:56px">
-          <img src="@@assets/logos/tashir.png" alt="Ташир пицца" style="--h:76px">
+          <img src="@@assets/logos/tashir.png" alt="{{Ташир пицца}}" style="--h:76px">
           <img src="@@assets/logos/tokio.png" alt="Tokio Inkarami" style="--h:56px">
           <img src="@@assets/logos/vitrulan.png" alt="Vitrulan" style="--h:50px">
         </div>
@@ -510,55 +612,55 @@
   <!-- 04 · Путь (без годов) -->
   <section class="section" id="path">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">Путь</div>
-      <h2>От агентства —<br>к роли CMO.</h2>
+      <div class="sec-num">{{Путь}}</div>
+      <h2>{{От агентства —<br>к роли CMO.}}</h2>
     </div>
     <ol class="path">
       <li data-reveal>
-        <span class="tag tag-now">Сейчас</span>
+        <span class="tag tag-now">{{Сейчас}}</span>
         <h3>Green Light</h3>
-        <p class="role">Ведущий маркетолог</p>
-        <p class="note">B2B-маркетинг системного интегратора в IT и информационной безопасности: лидогенерация, качество лида, связка маркетинга с продажами.</p>
+        <p class="role">{{Ведущий маркетолог}}</p>
+        <p class="note">{{B2B-маркетинг системного интегратора в IT и информационной безопасности: лидогенерация, качество лида, связка маркетинга с продажами.}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Медэстетика</span>
+        <span class="tag">{{Медэстетика}}</span>
         <h3>InMode · Classys · Tokio Inkarami</h3>
-        <p class="role">CMO у казахстанского дистрибьютора</p>
-        <p class="note">Маркетинг международных брендов в Казахстане: стратегия, каналы, команда, запуски и мероприятия.</p>
+        <p class="role">{{CMO у казахстанского дистрибьютора}}</p>
+        <p class="note">{{Маркетинг международных брендов в Казахстане: стратегия, каналы, команда, запуски и мероприятия.}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Свой продукт</span>
+        <span class="tag">{{Свой продукт}}</span>
         <h3>IZI</h3>
-        <p class="role">Основатель · CMO</p>
-        <p class="note">Линейка из шести приложений для изучения языков — от контента и маркетинга до подписок и публикации в App Store.</p>
+        <p class="role">{{Основатель · CMO}}</p>
+        <p class="note">{{Линейка из шести приложений для изучения языков — от контента и маркетинга до подписок и публикации в App Store.}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Креатив</span>
+        <span class="tag">{{Креатив}}</span>
         <h3>Café Leffe</h3>
-        <p class="role">Арт-директор</p>
+        <p class="role">{{Арт-директор}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Отделка и краски</span>
+        <span class="tag">{{Отделка и краски}}</span>
         <h3>Derufa · Pentrilo</h3>
-        <p class="role">CMO у казахстанского дистрибьютора</p>
-        <p class="note">Derufa (Германия / Россия) — ключевой бренд лакокрасочных материалов: акриловые и интерьерные краски, фасадные покрытия, премиальные декоративные штукатурки. Pentrilo (Испания).</p>
+        <p class="role">{{CMO у казахстанского дистрибьютора}}</p>
+        <p class="note">{{Derufa (Германия / Россия) — ключевой бренд лакокрасочных материалов: акриловые и интерьерные краски, фасадные покрытия, премиальные декоративные штукатурки. Pentrilo (Испания).}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Агентство</span>
+        <span class="tag">{{Агентство}}</span>
         <h3>SMMART Digital</h3>
-        <p class="role">Руководитель отдела маркетинга и продаж</p>
-        <p class="note">Собрал и обучил команду — маркетологи, SMM, копирайтеры, дизайнеры. Стратегия, KPI, бюджеты и аналитика.</p>
+        <p class="role">{{Руководитель отдела маркетинга и продаж}}</p>
+        <p class="note">{{Собрал и обучил команду — маркетологи, SMM, копирайтеры, дизайнеры. Стратегия, KPI, бюджеты и аналитика.}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Бренды</span>
-        <h3>Black Star · Volkswagen · Benetton · Dodo Pizza · Ташир</h3>
-        <p class="role">Маркетинг и SMM</p>
+        <span class="tag">{{Бренды}}</span>
+        <h3>{{Black Star · Volkswagen · Benetton · Dodo Pizza · Ташир}}</h3>
+        <p class="role">{{Маркетинг и SMM}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Начало</span>
-        <h3>Юриспруденция</h3>
-        <p class="role">Главный юрист по защите прав потребителей</p>
-        <p class="note">Отсюда привычка проверять регуляторные требования до запуска рекламы.</p>
+        <span class="tag">{{Начало}}</span>
+        <h3>{{Юриспруденция}}</h3>
+        <p class="role">{{Главный юрист по защите прав потребителей}}</p>
+        <p class="note">{{Отсюда привычка проверять регуляторные требования до запуска рекламы.}}</p>
       </li>
     </ol>
   </section>
@@ -593,31 +695,31 @@
   <!-- 06 · Как работаю как CMO -->
   <section class="section" id="cmo">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">Подход</div>
-      <h2>Что я беру на себя<br>как <em>CMO.</em></h2>
+      <div class="sec-num">{{Подход}}</div>
+      <h2>{{Что я беру на себя<br>как <em>CMO.</em>}}</h2>
     </div>
     <div class="pillars">
-      <div class="pillar" data-reveal style="--d:0ms"><span>01</span><h3>Стратегия</h3><p>Позиционирование, анализ рынка и конкурентов, план каналов — онлайн и офлайн.</p></div>
-      <div class="pillar" data-reveal style="--d:70ms"><span>02</span><h3>Команда</h3><p>Подбор, обучение и мотивация маркетологов, SMM, дизайнеров и копирайтеров.</p></div>
-      <div class="pillar" data-reveal style="--d:140ms"><span>03</span><h3>Бюджет и KPI</h3><p>Распределение бюджета, контроль расхода, CPA, ROI и LTV по каждому каналу.</p></div>
-      <div class="pillar" data-reveal style="--d:210ms"><span>04</span><h3>Лиды и продажи</h3><p>Критерии качества лида, передача в продажи, материалы для отдела продаж.</p></div>
-      <div class="pillar" data-reveal style="--d:280ms"><span>05</span><h3>Бренд</h3><p>Айдентика, tone of voice, PR, мероприятия и коллаборации.</p></div>
-      <div class="pillar" data-reveal style="--d:350ms"><span>06</span><h3>Аналитика</h3><p>Сквозные метрики, регулярные отчёты и быстрые тесты новых каналов.</p></div>
+      <div class="pillar" data-reveal style="--d:0ms"><span>01</span><h3>{{Стратегия}}</h3><p>{{Позиционирование, анализ рынка и конкурентов, план каналов — онлайн и офлайн.}}</p></div>
+      <div class="pillar" data-reveal style="--d:70ms"><span>02</span><h3>{{Команда}}</h3><p>{{Подбор, обучение и мотивация маркетологов, SMM, дизайнеров и копирайтеров.}}</p></div>
+      <div class="pillar" data-reveal style="--d:140ms"><span>03</span><h3>{{Бюджет и KPI}}</h3><p>{{Распределение бюджета, контроль расхода, CPA, ROI и LTV по каждому каналу.}}</p></div>
+      <div class="pillar" data-reveal style="--d:210ms"><span>04</span><h3>{{Лиды и продажи}}</h3><p>{{Критерии качества лида, передача в продажи, материалы для отдела продаж.}}</p></div>
+      <div class="pillar" data-reveal style="--d:280ms"><span>05</span><h3>{{Бренд}}</h3><p>{{Айдентика, tone of voice, PR, мероприятия и коллаборации.}}</p></div>
+      <div class="pillar" data-reveal style="--d:350ms"><span>06</span><h3>{{Аналитика}}</h3><p>{{Сквозные метрики, регулярные отчёты и быстрые тесты новых каналов.}}</p></div>
     </div>
     <blockquote class="quote" data-reveal>
-      «Я точно знаю, как найти клиентов, как выстроить с ними доверительные отношения — и как передать этот опыт вашей команде.»
+      {{«Я точно знаю, как найти клиентов, как выстроить с ними доверительные отношения — и как передать этот опыт вашей команде.»}}
     </blockquote>
   </section>
 
   <!-- 07 · Event-маркетинг — отдельный экран, наполним позже -->
   <section class="section events" id="events">
-    <div class="sec-num" data-reveal>Event-маркетинг</div>
-    <h2 class="events-title" data-reveal><span>Event</span><br>маркетинг.</h2>
-    <p class="sec-lead" data-reveal>Презентации, конференции, выставки и коллаборации — 100+ выступлений в России и Казахстане.</p>
+    <div class="sec-num" data-reveal>{{Event-маркетинг}}</div>
+    <h2 class="events-title" data-reveal>{{<span>Event</span><br>маркетинг.}}</h2>
+    <p class="sec-lead" data-reveal>{{Презентации, конференции, выставки и коллаборации — 100+ выступлений в России и Казахстане.}}</p>
     <div class="events-list">
 <!--EVENTS-->
       <div class="event-sync" data-reveal role="status">
-        <div class="sync-row"><span class="sync-dot"></span><b>Выгрузка архива мероприятий</b><span class="sync-note">фото и отчёты по остальным событиям — в обработке</span></div>
+        <div class="sync-row"><span class="sync-dot"></span><b>{{Выгрузка архива мероприятий}}</b><span class="sync-note">{{фото и отчёты по остальным событиям — в обработке}}</span></div>
         <div class="sync-bar"><i></i></div>
       </div>
     </div>
@@ -627,13 +729,13 @@
   <section class="section" id="ai">
     <div class="sec-head" data-reveal>
       <div class="sec-num">AI</div>
-      <h2>Внедряю AI<br>в маркетинг — <em>на практике.</em></h2>
+      <h2>{{Внедряю AI<br>в маркетинг — <em>на практике.</em>}}</h2>
     </div>
     <div class="ai-grid">
-      <div class="ai-card" data-reveal style="--d:0ms"><h3>Агенты для рекламы и аналитики</h3><p>Отчёты Meta, Google Ads, LinkedIn и GA4 собираются по API: расход, лиды, стоимость лида — без ручных выгрузок.</p></div>
-      <div class="ai-card" data-reveal style="--d:80ms"><h3>Контент на потоке</h3><p>SEO-блоги на нескольких языках: генерация, редактура и публикация как единый конвейер.</p></div>
-      <div class="ai-card" data-reveal style="--d:160ms"><h3>Продукты с AI-агентами</h3><p>Шесть мобильных приложений собраны и выпущены вместе с AI-агентами для разработки.</p></div>
-      <div class="ai-card" data-reveal style="--d:240ms"><h3>AI-сценарии для команды</h3><p>Библиотека промптов и агентов под задачи маркетинга: брифы, отчёты, материалы для продаж.</p></div>
+      <div class="ai-card" data-reveal style="--d:0ms"><h3>{{Агенты для рекламы и аналитики}}</h3><p>{{Отчёты Meta, Google Ads, LinkedIn и GA4 собираются по API: расход, лиды, стоимость лида — без ручных выгрузок.}}</p></div>
+      <div class="ai-card" data-reveal style="--d:80ms"><h3>{{Контент на потоке}}</h3><p>{{SEO-блоги на нескольких языках: генерация, редактура и публикация как единый конвейер.}}</p></div>
+      <div class="ai-card" data-reveal style="--d:160ms"><h3>{{Продукты с AI-агентами}}</h3><p>{{Шесть мобильных приложений собраны и выпущены вместе с AI-агентами для разработки.}}</p></div>
+      <div class="ai-card" data-reveal style="--d:240ms"><h3>{{AI-сценарии для команды}}</h3><p>{{Библиотека промптов и агентов под задачи маркетинга: брифы, отчёты, материалы для продаж.}}</p></div>
     </div>
     <div class="chips" data-reveal><span>Claude</span><span>Claude Code</span><span>Gemini</span><span>Meta Marketing API</span><span>Google Ads API</span><span>GA4 API</span></div>
   </section>
@@ -643,15 +745,15 @@
     <div class="apps-layout">
       <div>
         <div class="sec-head" data-reveal>
-          <div class="sec-num">Приложения</div>
-          <h2>Разработка iOS<br>и Android-приложений.</h2>
-          <p class="sec-lead">Делаю мобильные приложения под ключ: продукт и контент, подписки, пуш-уведомления, аналитика и публикация в сторах.</p>
+          <div class="sec-num">{{Приложения}}</div>
+          <h2>{{Разработка iOS<br>и Android-приложений.}}</h2>
+          <p class="sec-lead">{{Делаю мобильные приложения под ключ: продукт и контент, подписки, пуш-уведомления, аналитика и публикация в сторах.}}</p>
         </div>
         <div class="apps-facts" data-reveal>
-          <div><b>6</b><span>приложений опубликовано в App Store</span></div>
-          <div><b>0→1</b><span>от идеи до релиза — своими руками и с AI-агентами</span></div>
+          <div><b>6</b><span>{{приложений опубликовано в App Store}}</span></div>
+          <div><b>0→1</b><span>{{от идеи до релиза — своими руками и с AI-агентами}}</span></div>
         </div>
-        <div class="chips" data-reveal><span>Capacitor</span><span>Firebase</span><span>Подписки · RevenueCat</span><span>Push-уведомления</span><span>Обновление контента без релиза</span></div>
+        <div class="chips" data-reveal><span>Capacitor</span><span>Firebase</span><span>{{Подписки · RevenueCat}}</span><span>{{Push-уведомления}}</span><span>{{Обновление контента без релиза}}</span></div>
       </div>
 
       <div class="stores" data-reveal>
@@ -697,54 +799,54 @@
   <!-- 10 · Образование -->
   <section class="section" id="education">
     <div class="sec-head" data-reveal>
-      <div class="sec-num">Образование</div>
-      <h2>Учусь <em>постоянно.</em></h2>
+      <div class="sec-num">{{Образование}}</div>
+      <h2>{{Учусь <em>постоянно.</em>}}</h2>
     </div>
     <ol class="path edu">
       <li data-reveal>
-        <span class="tag tag-now">Учусь сейчас</span>
+        <span class="tag tag-now">{{Учусь сейчас}}</span>
         <h3>MBA · Illinois Tech</h3>
-        <p class="role">Illinois Institute of Technology, онлайн на Coursera</p>
-        <p class="note">Пройдено: <a href="https://www.coursera.org/verify/EPG292YUPON5" target="_blank" rel="noopener">Competitive Strategy ↗</a>, <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener">MBA Orientation ↗</a></p>
+        <p class="role">{{Illinois Institute of Technology, онлайн на Coursera}}</p>
+        <p class="note">{{Пройдено:}} <a href="https://www.coursera.org/verify/EPG292YUPON5" target="_blank" rel="noopener">Competitive Strategy ↗</a>, <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener">MBA Orientation ↗</a></p>
       </li>
       <li data-reveal>
-        <span class="tag">Бакалавр</span>
-        <h3>Юриспруденция</h3>
-        <p class="role">Национальный институт бизнеса</p>
+        <span class="tag">{{Бакалавр}}</span>
+        <h3>{{Юриспруденция}}</h3>
+        <p class="role">{{Национальный институт бизнеса}}</p>
       </li>
       <li data-reveal>
-        <span class="tag">Маркетинг</span>
-        <h3>Университет «Синергия»</h3>
-        <p class="role">Маркетинг</p>
+        <span class="tag">{{Маркетинг}}</span>
+        <h3>{{Университет «Синергия»}}</h3>
+        <p class="role">{{Маркетинг}}</p>
       </li>
     </ol>
 
     <div class="certs-head" data-reveal>
-      <h3>19 сертификатов</h3>
-      <p>Coursera · нажми на любой — откроется проверка</p>
+      <h3>{{19 сертификатов}}</h3>
+      <p>{{Coursera · нажми на любой — откроется проверка}}</p>
     </div>
     <div class="marquee certs-marquee" data-reveal>
       <div class="marquee-track">
         <div class="marquee-set">
-          <a href="https://www.coursera.org/verify/professional-cert/7WOUDYWWT7GM" target="_blank" rel="noopener" title="Google Digital Marketing & E-commerce — Professional Certificate — проверить на Coursera"><img src="@@assets/certs/7WOUDYWWT7GM.webp" alt="Сертификат: Google Digital Marketing & E-commerce — Professional Certificate" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/EPG292YUPON5" target="_blank" rel="noopener" title="Illinois Tech — Competitive Strategy — проверить на Coursera"><img src="@@assets/certs/EPG292YUPON5.webp" alt="Сертификат: Illinois Tech — Competitive Strategy" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/USSZ1KIWVUMT" target="_blank" rel="noopener" title="Meta — Marketing Analytics Foundation — проверить на Coursera"><img src="@@assets/certs/USSZ1KIWVUMT.webp" alt="Сертификат: Meta — Marketing Analytics Foundation" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/LU02VJLY6TRE" target="_blank" rel="noopener" title="UC Davis — The Strategy of Content Marketing — проверить на Coursera"><img src="@@assets/certs/LU02VJLY6TRE.webp" alt="Сертификат: UC Davis — The Strategy of Content Marketing" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener" title="Illinois Tech — MBA Orientation — проверить на Coursera"><img src="@@assets/certs/72UWBHZMOP78.webp" alt="Сертификат: Illinois Tech — MBA Orientation" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/ZSTZ80YAU8CQ" target="_blank" rel="noopener" title="Meta — Introduction to Data Analytics — проверить на Coursera"><img src="@@assets/certs/ZSTZ80YAU8CQ.webp" alt="Сертификат: Meta — Introduction to Data Analytics" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/325G651F4XLP" target="_blank" rel="noopener" title="Canva — Social Media Visuals for Business — проверить на Coursera"><img src="@@assets/certs/325G651F4XLP.webp" alt="Сертификат: Canva — Social Media Visuals for Business" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/66GTLZD05273" target="_blank" rel="noopener" title="Canva — Create and Design Digital Products — проверить на Coursera"><img src="@@assets/certs/66GTLZD05273.webp" alt="Сертификат: Canva — Create and Design Digital Products" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/86SDRUP7F1XK" target="_blank" rel="noopener" title="Google — Start Writing Prompts like a Pro — проверить на Coursera"><img src="@@assets/certs/86SDRUP7F1XK.webp" alt="Сертификат: Google — Start Writing Prompts like a Pro" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/LNTQ94E708QS" target="_blank" rel="noopener" title="Google — Design Prompts for Everyday Work Tasks — проверить на Coursera"><img src="@@assets/certs/LNTQ94E708QS.webp" alt="Сертификат: Google — Design Prompts for Everyday Work Tasks" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/9P44T2VYQE7G" target="_blank" rel="noopener" title="Google — Speed Up Data Analysis and Presentation Building — проверить на Coursera"><img src="@@assets/certs/9P44T2VYQE7G.webp" alt="Сертификат: Google — Speed Up Data Analysis and Presentation Building" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/SEKFJ3PQZRDF" target="_blank" rel="noopener" title="Google — Use AI as a Creative or Expert Partner — проверить на Coursera"><img src="@@assets/certs/SEKFJ3PQZRDF.webp" alt="Сертификат: Google — Use AI as a Creative or Expert Partner" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/8JEQUABB2WOM" target="_blank" rel="noopener" title="Google — Foundations of Digital Marketing and E-commerce — проверить на Coursera"><img src="@@assets/certs/8JEQUABB2WOM.webp" alt="Сертификат: Google — Foundations of Digital Marketing and E-commerce" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/FD9RR55NNIFG" target="_blank" rel="noopener" title="Google — Attract and Engage Customers with Digital Marketing — проверить на Coursera"><img src="@@assets/certs/FD9RR55NNIFG.webp" alt="Сертификат: Google — Attract and Engage Customers with Digital Marketing" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/W5XXWKJHW7NG" target="_blank" rel="noopener" title="Google — From Likes to Leads — проверить на Coursera"><img src="@@assets/certs/W5XXWKJHW7NG.webp" alt="Сертификат: Google — From Likes to Leads" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/AQJAVL7V9OEJ" target="_blank" rel="noopener" title="Google — Think Outside the Inbox: Email Marketing — проверить на Coursera"><img src="@@assets/certs/AQJAVL7V9OEJ.webp" alt="Сертификат: Google — Think Outside the Inbox: Email Marketing" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/YGGNEBGVTYWN" target="_blank" rel="noopener" title="Google — Assess for Success: Marketing Analytics — проверить на Coursera"><img src="@@assets/certs/YGGNEBGVTYWN.webp" alt="Сертификат: Google — Assess for Success: Marketing Analytics" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/3NRVEAKAPPRY" target="_blank" rel="noopener" title="Google — Make the Sale: E-commerce Stores — проверить на Coursera"><img src="@@assets/certs/3NRVEAKAPPRY.webp" alt="Сертификат: Google — Make the Sale: E-commerce Stores" loading="lazy"></a>
-          <a href="https://www.coursera.org/verify/ZJCQ8MOLYKWA" target="_blank" rel="noopener" title="Google — Satisfaction Guaranteed: Customer Loyalty — проверить на Coursera"><img src="@@assets/certs/ZJCQ8MOLYKWA.webp" alt="Сертификат: Google — Satisfaction Guaranteed: Customer Loyalty" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/professional-cert/7WOUDYWWT7GM" target="_blank" rel="noopener" title="Google Digital Marketing & E-commerce — Professional Certificate — {{проверить на Coursera}}"><img src="@@assets/certs/7WOUDYWWT7GM.webp" alt="{{Сертификат:}} Google Digital Marketing & E-commerce — Professional Certificate" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/EPG292YUPON5" target="_blank" rel="noopener" title="Illinois Tech — Competitive Strategy — {{проверить на Coursera}}"><img src="@@assets/certs/EPG292YUPON5.webp" alt="{{Сертификат:}} Illinois Tech — Competitive Strategy" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/USSZ1KIWVUMT" target="_blank" rel="noopener" title="Meta — Marketing Analytics Foundation — {{проверить на Coursera}}"><img src="@@assets/certs/USSZ1KIWVUMT.webp" alt="{{Сертификат:}} Meta — Marketing Analytics Foundation" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/LU02VJLY6TRE" target="_blank" rel="noopener" title="UC Davis — The Strategy of Content Marketing — {{проверить на Coursera}}"><img src="@@assets/certs/LU02VJLY6TRE.webp" alt="{{Сертификат:}} UC Davis — The Strategy of Content Marketing" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/72UWBHZMOP78" target="_blank" rel="noopener" title="Illinois Tech — MBA Orientation — {{проверить на Coursera}}"><img src="@@assets/certs/72UWBHZMOP78.webp" alt="{{Сертификат:}} Illinois Tech — MBA Orientation" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/ZSTZ80YAU8CQ" target="_blank" rel="noopener" title="Meta — Introduction to Data Analytics — {{проверить на Coursera}}"><img src="@@assets/certs/ZSTZ80YAU8CQ.webp" alt="{{Сертификат:}} Meta — Introduction to Data Analytics" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/325G651F4XLP" target="_blank" rel="noopener" title="Canva — Social Media Visuals for Business — {{проверить на Coursera}}"><img src="@@assets/certs/325G651F4XLP.webp" alt="{{Сертификат:}} Canva — Social Media Visuals for Business" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/66GTLZD05273" target="_blank" rel="noopener" title="Canva — Create and Design Digital Products — {{проверить на Coursera}}"><img src="@@assets/certs/66GTLZD05273.webp" alt="{{Сертификат:}} Canva — Create and Design Digital Products" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/86SDRUP7F1XK" target="_blank" rel="noopener" title="Google — Start Writing Prompts like a Pro — {{проверить на Coursera}}"><img src="@@assets/certs/86SDRUP7F1XK.webp" alt="{{Сертификат:}} Google — Start Writing Prompts like a Pro" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/LNTQ94E708QS" target="_blank" rel="noopener" title="Google — Design Prompts for Everyday Work Tasks — {{проверить на Coursera}}"><img src="@@assets/certs/LNTQ94E708QS.webp" alt="{{Сертификат:}} Google — Design Prompts for Everyday Work Tasks" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/9P44T2VYQE7G" target="_blank" rel="noopener" title="Google — Speed Up Data Analysis and Presentation Building — {{проверить на Coursera}}"><img src="@@assets/certs/9P44T2VYQE7G.webp" alt="{{Сертификат:}} Google — Speed Up Data Analysis and Presentation Building" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/SEKFJ3PQZRDF" target="_blank" rel="noopener" title="Google — Use AI as a Creative or Expert Partner — {{проверить на Coursera}}"><img src="@@assets/certs/SEKFJ3PQZRDF.webp" alt="{{Сертификат:}} Google — Use AI as a Creative or Expert Partner" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/8JEQUABB2WOM" target="_blank" rel="noopener" title="Google — Foundations of Digital Marketing and E-commerce — {{проверить на Coursera}}"><img src="@@assets/certs/8JEQUABB2WOM.webp" alt="{{Сертификат:}} Google — Foundations of Digital Marketing and E-commerce" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/FD9RR55NNIFG" target="_blank" rel="noopener" title="Google — Attract and Engage Customers with Digital Marketing — {{проверить на Coursera}}"><img src="@@assets/certs/FD9RR55NNIFG.webp" alt="{{Сертификат:}} Google — Attract and Engage Customers with Digital Marketing" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/W5XXWKJHW7NG" target="_blank" rel="noopener" title="Google — From Likes to Leads — {{проверить на Coursera}}"><img src="@@assets/certs/W5XXWKJHW7NG.webp" alt="{{Сертификат:}} Google — From Likes to Leads" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/AQJAVL7V9OEJ" target="_blank" rel="noopener" title="Google — Think Outside the Inbox: Email Marketing — {{проверить на Coursera}}"><img src="@@assets/certs/AQJAVL7V9OEJ.webp" alt="{{Сертификат:}} Google — Think Outside the Inbox: Email Marketing" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/YGGNEBGVTYWN" target="_blank" rel="noopener" title="Google — Assess for Success: Marketing Analytics — {{проверить на Coursera}}"><img src="@@assets/certs/YGGNEBGVTYWN.webp" alt="{{Сертификат:}} Google — Assess for Success: Marketing Analytics" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/3NRVEAKAPPRY" target="_blank" rel="noopener" title="Google — Make the Sale: E-commerce Stores — {{проверить на Coursera}}"><img src="@@assets/certs/3NRVEAKAPPRY.webp" alt="{{Сертификат:}} Google — Make the Sale: E-commerce Stores" loading="lazy"></a>
+          <a href="https://www.coursera.org/verify/ZJCQ8MOLYKWA" target="_blank" rel="noopener" title="Google — Satisfaction Guaranteed: Customer Loyalty — {{проверить на Coursera}}"><img src="@@assets/certs/ZJCQ8MOLYKWA.webp" alt="{{Сертификат:}} Google — Satisfaction Guaranteed: Customer Loyalty" loading="lazy"></a>
         </div>
       </div>
     </div>
@@ -752,7 +854,7 @@
       <article class="cert cert-main" data-reveal>
         <span class="issuer">Google · Professional Certificate</span>
         <h4><a href="https://www.coursera.org/verify/professional-cert/7WOUDYWWT7GM" target="_blank" rel="noopener">Digital Marketing &amp; E-commerce<i>↗</i></a></h4>
-        <p class="cert-sub">8 курсов программы:</p>
+        <p class="cert-sub">{{8 курсов программы:}}</p>
         <ul>
           <li><a href="https://www.coursera.org/verify/8JEQUABB2WOM" target="_blank" rel="noopener">Foundations of Digital Marketing and E-commerce<i>↗</i></a></li>
           <li><a href="https://www.coursera.org/verify/FD9RR55NNIFG" target="_blank" rel="noopener">Attract and Engage Customers with Digital Marketing<i>↗</i></a></li>
@@ -765,7 +867,7 @@
         </ul>
       </article>
       <article class="cert" data-reveal style="--d:60ms">
-        <span class="issuer">Google · AI и промптинг</span>
+        <span class="issuer">{{Google · AI и промптинг}}</span>
         <ul>
           <li><a href="https://www.coursera.org/verify/86SDRUP7F1XK" target="_blank" rel="noopener">Start Writing Prompts like a Pro<i>↗</i></a></li>
           <li><a href="https://www.coursera.org/verify/LNTQ94E708QS" target="_blank" rel="noopener">Design Prompts for Everyday Work Tasks<i>↗</i></a></li>
@@ -774,20 +876,20 @@
         </ul>
       </article>
       <article class="cert" data-reveal style="--d:120ms">
-        <span class="issuer">Meta · аналитика</span>
+        <span class="issuer">{{Meta · аналитика}}</span>
         <ul>
           <li><a href="https://www.coursera.org/verify/USSZ1KIWVUMT" target="_blank" rel="noopener">Marketing Analytics Foundation<i>↗</i></a></li>
           <li><a href="https://www.coursera.org/verify/ZSTZ80YAU8CQ" target="_blank" rel="noopener">Introduction to Data Analytics<i>↗</i></a></li>
         </ul>
       </article>
       <article class="cert" data-reveal style="--d:180ms">
-        <span class="issuer">UC Davis · контент</span>
+        <span class="issuer">{{UC Davis · контент}}</span>
         <ul>
           <li><a href="https://www.coursera.org/verify/LU02VJLY6TRE" target="_blank" rel="noopener">The Strategy of Content Marketing<i>↗</i></a></li>
         </ul>
       </article>
       <article class="cert" data-reveal style="--d:240ms">
-        <span class="issuer">Canva · дизайн</span>
+        <span class="issuer">{{Canva · дизайн}}</span>
         <ul>
           <li><a href="https://www.coursera.org/verify/325G651F4XLP" target="_blank" rel="noopener">Use Canva to Create Social Media Visuals for Business<i>↗</i></a></li>
           <li><a href="https://www.coursera.org/verify/66GTLZD05273" target="_blank" rel="noopener">Create and Design Digital Products using Canva<i>↗</i></a></li>
@@ -798,15 +900,15 @@
 
   <!-- 11 · Контакты -->
   <section class="section contact" id="contact">
-    <div class="sec-num" data-reveal>Контакты</div>
-    <h2 class="contact-title" data-reveal>Ищу роль <em>CMO.</em><br>Обсудим?</h2>
+    <div class="sec-num" data-reveal>{{Контакты}}</div>
+    <h2 class="contact-title" data-reveal>{{Ищу роль <em>CMO.</em><br>Обсудим?}}</h2>
     <div class="contact-links" data-reveal>
       <a href="mailto:founder@izigreek.com">founder@izigreek.com</a>
       <a href="tel:+77751529438">+7 775 152 94 38</a>
       <a href="https://www.linkedin.com/in/danil-ulyanov-211850362" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn primary" href="Danil_Ulyanov_CV.pdf" download="Danil_Ulyanov_CV.pdf">Резюме, PDF ↓</a>
+      <a class="btn primary" href="{{_p}}{{_cv}}" download="{{_cv}}">{{Резюме, PDF ↓}}</a>
     </div>
-    <footer>© 2026 Данил Ульянов</footer>
+    <footer>{{© 2026 Данил Ульянов}}</footer>
   </section>
 
 </main>
@@ -818,14 +920,7 @@
   const cv = document.getElementById("metal");
 
   /* ---------- подпись с меняющимся окончанием ---------- */
-  const phrases = ["реклама окупалась.", "лиды доходили до продаж.", "продукт находил своих людей."];
-  const slot = document.getElementById("slot");
-  const spans = phrases.map(t => {
-    const s = document.createElement("span");
-    s.textContent = t;
-    slot.appendChild(s);
-    return s;
-  });
+  const spans = [...document.getElementById("slot").children];   // фразы лежат в разметке — их переводит сборка
   // состояние каждой фразы вычисляется заново на каждом шаге — подпись не рассинхронизируется
   let phrase = 0;
   const paint = prev => spans.forEach((el, i) => { el.className = i === phrase ? "in" : i === prev ? "out" : "wait"; });
@@ -844,7 +939,8 @@
   /* ---------- жидкий металл ---------- */
   const gl = cv.getContext("webgl", { antialias: false, alpha: false, depth: false, powerPreference: "low-power" });
   if (!gl) {
-    hero.style.background = "linear-gradient(160deg, #2a2b30, #8d9096 45%, #1b1c20)";
+    hero.style.background = document.documentElement.dataset.theme === "light"
+      ? "linear-gradient(160deg, #c9cbd0, #f4f4f2 45%, #b9bcc2)" : "linear-gradient(160deg, #2a2b30, #8d9096 45%, #1b1c20)";
     return;
   }
 
@@ -854,7 +950,7 @@
     void main(){ vUv = vec2(p.x * .5 + .5, .5 - p.y * .5); gl_Position = vec4(p, 0., 1.); }`;
   const FS = `precision highp float;
     varying vec2 vUv;
-    uniform float uTime, uAspect, uHover;
+    uniform float uTime, uAspect, uHover, uLight;
     uniform vec2 uMouse;
     uniform vec4 uDrops[${DROPS}];   // xy — где, z — когда, w — сила
 
@@ -891,7 +987,8 @@
       vec3 r = reflect(vec3(0., 0., -1.), n);
       float band = .5 + .5 * sin(r.y * 3.4 + r.x * 1.2 + .2);
       band = smoothstep(.08, .92, band);
-      vec3 env = mix(vec3(.05, .055, .065), vec3(.74, .76, .8), band);
+      // светлая тема — та же ртуть, но в светлой студии: тени серебристые, а не чёрные
+      vec3 env = mix(mix(vec3(.05, .055, .065), vec3(.6, .62, .66), uLight), mix(vec3(.74, .76, .8), vec3(.96, .965, .97), uLight), band);
       env += vec3(1.) * pow(max(dot(r, normalize(vec3(-.3, -.45, .84))), 0.), 70.) * .9;   // блик софтбокса
       env += vec3(.85, .9, 1.) * pow(max(dot(r, normalize(vec3(.5, .2, .84))), 0.), 24.) * .25; // мягкий контровой
       float fres = .8 + .2 * pow(1. - n.z, 1.5);
@@ -916,7 +1013,9 @@
   gl.enableVertexAttribArray(aP);
   gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 0, 0);
   const U = n => gl.getUniformLocation(prog, n);
-  const uTime = U("uTime"), uAspect = U("uAspect"), uHover = U("uHover"), uMouse = U("uMouse"), uDrops = U("uDrops[0]");
+  const uTime = U("uTime"), uAspect = U("uAspect"), uHover = U("uHover"), uMouse = U("uMouse"), uDrops = U("uDrops[0]"), uLight = U("uLight");
+  const setTheme = () => { gl.uniform1f(uLight, document.documentElement.dataset.theme === "light" ? 1 : 0); kick(); };
+  document.addEventListener("themechange", setTheme);
 
   let aspect = 1;
   function resize() {
@@ -1005,6 +1104,7 @@
   new ResizeObserver(resize).observe(hero);
 
   resize();
+  setTheme();
   // при загрузке — две «капли» рядом с портретом, чтобы сразу было видно, что поверхность жидкая
   if (!reduceMotion) {
     setTimeout(() => {
@@ -1024,12 +1124,12 @@
   // счётчики «добегают» до значения, когда блок появляется на экране
   function countUp(el) {
     const end = +el.dataset.count, pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
-    if (reduceMotion) { el.textContent = pre + end.toLocaleString("ru-RU") + suf; return; }
+    if (reduceMotion) { el.textContent = pre + end.toLocaleString(document.documentElement.lang) + suf; return; }
     const dur = 1400, t0 = performance.now();
     (function tick(now) {
       const k = Math.min(1, (now - t0) / dur);
       const e = 1 - Math.pow(1 - k, 3);
-      el.textContent = pre + Math.round(end * e).toLocaleString("ru-RU") + suf;
+      el.textContent = pre + Math.round(end * e).toLocaleString(document.documentElement.lang) + suf;
       if (k < 1) requestAnimationFrame(tick);
     })(t0);
   }
@@ -1107,6 +1207,22 @@
 </script>
 <script>
 (function () {
+  /* ---------- тема: кнопка в меню; пока посетитель не выбрал сам — следуем за системой ---------- */
+  const root = document.documentElement;
+  const apply = t => { root.dataset.theme = t; document.dispatchEvent(new Event("themechange")); };
+  document.querySelector(".theme-tg").addEventListener("click", () => {
+    const t = root.dataset.theme === "light" ? "dark" : "light";
+    try { localStorage.setItem("theme", t); } catch (e) {}
+    apply(t);
+  });
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+    let saved = null; try { saved = localStorage.getItem("theme"); } catch (err) {}
+    if (!saved) apply(e.matches ? "light" : "dark");
+  });
+})();
+</script>
+<script>
+(function () {
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const hero = document.getElementById("hero");
 
@@ -1139,7 +1255,7 @@
   const FS = `#extension GL_OES_standard_derivatives : enable
     precision highp float;
     uniform vec2 uRes;
-    uniform float uTime, uScroll;
+    uniform float uTime, uScroll, uInk;   // uInk: 1 — светлые линии (тёмная тема), 0 — тёмные (светлая)
     vec3 perm(vec3 x){ return mod(((x * 34.) + 1.) * x, 289.); }
     // simplex-шум 2D: даёт плавный «рельеф», из которого берём горизонтали
     float snoise(vec2 v){
@@ -1164,8 +1280,8 @@
       float w = fwidth(v);
       float line = 1. - smoothstep(w * .6, w * 1.6, d);
       float idx = mod(floor(v + .5), 5.) == 0. ? 1.6 : 1.;   // каждая 5-я линия чуть ярче, как на топокартах
-      float a = line * .085 * idx;
-      gl_FragColor = vec4(vec3(a), a);
+      float a = line * mix(.065, .085, uInk) * idx;
+      gl_FragColor = vec4(vec3(a * uInk), a);
     }`;
   function sh(type, src) {
     const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
@@ -1178,7 +1294,10 @@
   gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
   const aP = gl.getAttribLocation(prog, "p"); gl.enableVertexAttribArray(aP); gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 0, 0);
-  const uRes = gl.getUniformLocation(prog, "uRes"), uTime = gl.getUniformLocation(prog, "uTime"), uScroll = gl.getUniformLocation(prog, "uScroll");
+  const uRes = gl.getUniformLocation(prog, "uRes"), uTime = gl.getUniformLocation(prog, "uTime"), uScroll = gl.getUniformLocation(prog, "uScroll"), uInk = gl.getUniformLocation(prog, "uInk");
+  const setInk = () => gl.uniform1f(uInk, document.documentElement.dataset.theme === "light" ? 0 : 1);
+  setInk();
+  document.addEventListener("themechange", () => { setInk(); draw(performance.now()); });
 
   function resize() {
     const k = Math.min(devicePixelRatio || 1, 1.5);   // тонким линиям нужна чёткость, но не больше 1.5x
